@@ -7,6 +7,40 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <div>Hello world</div>
+    <div>Hello world test</div>
+    <h1>7 wonders scoreboard</h1>
+    <table>
+      <tr>
+        <td>Nom</td>
+        <td>Militaire</td>
+        <td>Pièces</td>
+        <td>Merveille</td>
+        <td>Bleu</td>
+        <td>Jaune</td>
+        <td>Vert</td>
+        <td>Total</td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td id="Militaire"><input id="test" type="number"></td>
+        <td id="Pieces"><input id="test2" type="number"></td>
+        <td><input type="number"></td>
+        <td><input type="number"></td>
+        <td><input type="number"></td>
+        <td><input type="number"></td>
+        <td id="Score"></td>
+
+      </tr>
+    </table>
+    <button id="CalculScore" onclick="CalculScore">Calcul des scores</button>
+    <script>
+      document.getElementById("CalculScore").addEventListener("click", CalculScore);
+      
+      function CalculScore() {
+        document.getElementById("Score").innerHTML = Number(document.getElementById("test").value) + Number(document.getElementById("test2").value);
+
+        console.log(Number(document.getElementById("test").value) + Number(document.getElementById("test2").value))
+      }
+    </script>
   </body>
 </html>
