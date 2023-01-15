@@ -169,15 +169,15 @@
 
     function Test2() {
       let maxValue = 0;
-      let winner = 0;
+      let winner = "";
       for(let i = 1; i < numberOfPlayers+1; i++) {
         if(Number(document.getElementById(`Score${i}`).innerHTML) > maxValue) {
           maxValue = document.getElementById(`Score${i}`).innerHTML;
-          winner = document.getElementById(`Player${i}`).innerHTML;
+          winner = document.getElementById(`Player${i}`).value;
         }
       }
-      console.log(maxValue);
-      console.log(winner);
+      
+      alert(`Bravo !! ${winner} a gagné avec un score de ${maxValue} !!`);
     }
 
   </script>
