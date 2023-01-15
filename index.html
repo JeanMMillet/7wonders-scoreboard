@@ -60,11 +60,13 @@
     <button id="CalculScore" onclick="CalculScore">Calcul des scores</button>
     <button id="Gagnant" onclick="Gagnant">Vainqueur ?</button>
     <button id="Ajout" onclick="Ajout">Ajouter un joueur</button>
+    <button id="Retrait" onclick="Retrait">Supprimer un joueur</button>
     <script>
-      var i = 4;
+      let numberOfPlayers = 3;
       document.getElementById("CalculScore").addEventListener("click", CalculScore);
       document.getElementById("Gagnant").addEventListener("click", Gagnant);
       document.getElementById("Ajout").addEventListener("click", Ajout);
+      document.getElementById("Retrait").addEventListener("click", Retrait);
       function CalculScore() {
         document.getElementById("Score").innerHTML = Number(document.getElementById("test").value) 
         + Number(document.getElementById("test2").value) + Number(document.getElementById("test3").value) 
@@ -111,18 +113,24 @@
       }
 
       function Ajout() {
-        if (i < 9) {
-        document.getElementById("Scoreboard").insertRow(-1).innerHTML = '<tr><td><input id="P" type="text"></td><td id="Militaire"><input id="P3_1" type="number"></td><td id="Pieces"><input id="P3_2" type="number"></td><td><input id="P3_3" type="number"></td><td><input id="P3_4" type="number"></td><td><input id="P3_5" type="number"></td><td><input id="P3_6" type="number"></td><td id="Score3"></td></tr>';         
-        var newID = "P" + i.toString();
-        document.getElementById("P").id = newID;
-        i += 1;
-        console.log(i);
-        console.log(newID);}
+        if (numberOfPlayers < 9) {
+        document.getElementById("Scoreboard").insertRow(-1).innerHTML = '<tr><td><input type="text"></td><td ><input type="number"></td><td ><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td></td></tr>'; 
+        numberOfPlayers += 1;
+        }
       }
         // $("table > tr").each(function() {
         //   console.log($("td"));//});
   
-      
+      function Retrait() {
+        if(numberOfPlayers > 3) {
+          let table = document.getElementById("Scoreboard");
+          let rowCount = table.rows.length;
+          table.deleteRow(rowCount - 1);
+          numberOfPlayers -= 1;
+          console.log(rowCount);
+        }
+
+      }
       
     </script>
   
