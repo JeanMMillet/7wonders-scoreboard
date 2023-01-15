@@ -1,138 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>7 wonders scoreboards</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-    <div>Hello world test</div>
-    <h1>7 wonders scoreboard</h1>
-    <table id="Scoreboard">
-      <tr>
-        <td>Nom</td>
-        <td>Militaire</td>
-        <td>Pièces</td>
-        <td>Merveille</td>
-        <td>Bleu</td>
-        <td>Jaune</td>
-        <td>Vert</td>
-        <td>Total</td>
-      </tr>
-      <tr>
-        <td><input id="P1" type="text"></td>
-        <td id="Militaire"><input id="test" type="number"></td>
-        <td id="Pieces"><input id="test2" type="number"></td>
-        <td><input id="test3" type="number"></td>
-        <td><input id="test4" type="number"></td>
-        <td><input id="test5" type="number"></td>
-        <td><input id="test6" type="number"></td>
-        <td id="Score"></td>
 
-      </tr>
-      
-      <tr>
-        <td><input id="P2" type="text"></td>
-        <td id="Militaire"><input id="test7" type="number"></td>
-        <td id="Pieces"><input id="test8" type="number"></td>
-        <td><input id="test9" type="number"></td>
-        <td><input id="test10" type="number"></td>
-        <td><input id="test11" type="number"></td>
-        <td><input id="test12" type="number"></td>
-        <td id="Score2"></td>
-          
-      </tr>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>7 wonders scoreboards</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
 
-      <tr>
-        <td><input id="P3" type="text"></td>
-        <td id="Militaire"><input id="P3_1" type="number"></td>
-        <td id="Pieces"><input id="P3_2" type="number"></td>
-        <td><input id="P3_3" type="number"></td>
-        <td><input id="P3_4" type="number"></td>
-        <td><input id="P3_5" type="number"></td>
-        <td><input id="P3_6" type="number"></td>
-        <td id="Score3"></td>
-          
-      </tr>
-    </table>
-    <button id="CalculScore" onclick="CalculScore">Calcul des scores</button>
-    <button id="Gagnant" onclick="Gagnant">Vainqueur ?</button>
-    <button id="Ajout" onclick="Ajout">Ajouter un joueur</button>
-    <button id="Retrait" onclick="Retrait">Supprimer un joueur</button>
-    <script>
-      let numberOfPlayers = 3;
-      document.getElementById("CalculScore").addEventListener("click", CalculScore);
-      document.getElementById("Gagnant").addEventListener("click", Gagnant);
-      document.getElementById("Ajout").addEventListener("click", Ajout);
-      document.getElementById("Retrait").addEventListener("click", Retrait);
-      function CalculScore() {
-        document.getElementById("Score").innerHTML = Number(document.getElementById("test").value) 
-        + Number(document.getElementById("test2").value) + Number(document.getElementById("test3").value) 
+<body>
+  <div>Hello world test</div>
+  <h1>7 wonders scoreboard</h1>
+  <table id="Scoreboard">
+    <tr>
+      <td>Nom</td>
+      <td>Militaire</td>
+      <td>Pièces</td>
+      <td>Merveille</td>
+      <td>Bleu</td>
+      <td>Jaune</td>
+      <td>Vert</td>
+      <td>Total</td>
+    </tr>
+    <tr>
+      <td><input id="P1" type="text"></td>
+      <td id="Militaire"><input id="test" type="number"></td>
+      <td id="Pieces"><input id="test2" type="number"></td>
+      <td><input id="test3" type="number"></td>
+      <td><input id="test4" type="number"></td>
+      <td><input id="test5" type="number"></td>
+      <td><input id="test6" type="number"></td>
+      <td id="Score1"></td>
+
+    </tr>
+
+    <tr>
+      <td><input id="P2" type="text"></td>
+      <td id="Militaire"><input id="test7" type="number"></td>
+      <td id="Pieces"><input id="test8" type="number"></td>
+      <td><input id="test9" type="number"></td>
+      <td><input id="test10" type="number"></td>
+      <td><input id="test11" type="number"></td>
+      <td><input id="test12" type="number"></td>
+      <td id="Score2"></td>
+
+    </tr>
+
+    <tr>
+      <td><input id="P3" type="text"></td>
+      <td id="Militaire"><input id="P3_1" type="number"></td>
+      <td id="Pieces"><input id="P3_2" type="number"></td>
+      <td><input id="P3_3" type="number"></td>
+      <td><input id="P3_4" type="number"></td>
+      <td><input id="P3_5" type="number"></td>
+      <td><input id="P3_6" type="number"></td>
+      <td id="Score3"></td>
+
+    </tr>
+  </table>
+  <button id="CalculScore" onclick="CalculScore">Calcul des scores</button>
+  <button id="Gagnant" onclick="Gagnant">Vainqueur ?</button>
+  <button id="Ajout" onclick="Ajout">Ajouter un joueur</button>
+  <button id="Retrait" onclick="Retrait">Supprimer un joueur</button>
+  <button id="Test" onclick="Test">Test</button>
+  <script>
+    let numberOfPlayers = 3;
+    document.getElementById("CalculScore").addEventListener("click", CalculScore);
+    document.getElementById("Gagnant").addEventListener("click", Gagnant);
+    document.getElementById("Ajout").addEventListener("click", Ajout);
+    document.getElementById("Retrait").addEventListener("click", Retrait);
+    document.getElementById("Test").addEventListener("click", Test);
+    function CalculScore() {
+      document.getElementById("Score1").innerHTML = Number(document.getElementById("test").value)
+        + Number(document.getElementById("test2").value) + Number(document.getElementById("test3").value)
         + Number(document.getElementById("test4").value) + Number(document.getElementById("test5").value)
         + Number(document.getElementById("test6").value);
 
-        document.getElementById("Score2").innerHTML = Number(document.getElementById("test7").value) 
-        + Number(document.getElementById("test8").value) + Number(document.getElementById("test9").value) 
+      document.getElementById("Score2").innerHTML = Number(document.getElementById("test7").value)
+        + Number(document.getElementById("test8").value) + Number(document.getElementById("test9").value)
         + Number(document.getElementById("test10").value) + Number(document.getElementById("test11").value)
         + Number(document.getElementById("test12").value);
-        
-        document.getElementById("Score3").innerHTML = Number(document.getElementById("P3_1").value) 
-        + Number(document.getElementById("P3_2").value) + Number(document.getElementById("P3_3").value) 
+
+      document.getElementById("Score3").innerHTML = Number(document.getElementById("P3_1").value)
+        + Number(document.getElementById("P3_2").value) + Number(document.getElementById("P3_3").value)
         + Number(document.getElementById("P3_4").value) + Number(document.getElementById("P3_5").value)
         + Number(document.getElementById("P3_6").value);
 
-      
-        //console.log(document.getElementById("Score2").innerHTML);
-        //console.log(Number(document.getElementById("Score3").innerHTML));
-        console.log(Math.max(Number(document.getElementById("Score").innerHTML),
+
+      //console.log(document.getElementById("Score2").innerHTML);
+      //console.log(Number(document.getElementById("Score3").innerHTML));
+      console.log(Math.max(Number(document.getElementById("Score1").innerHTML),
         Number(document.getElementById("Score2").innerHTML), Number(document.getElementById("Score3").innerHTML)));
-      }
+    }
 
-      function Gagnant() {
-        max_val = 0;
-        a = Number(document.getElementById("Score").innerHTML);
-        b = Number(document.getElementById("Score2").innerHTML);
-        c = Number(document.getElementById("Score3").innerHTML);
-        if ( a > b && a > c)
-        {
+    function Gagnant() {
+      max_val = 0;
+      a = Number(document.getElementById("Score1").innerHTML);
+      b = Number(document.getElementById("Score2").innerHTML);
+      c = Number(document.getElementById("Score3").innerHTML);
+      if (a > b && a > c) {
         alert("Bravo! " + document.getElementById("P1").value + " a gagné avec un score de " +
-        a + "!!");
-        } 
-        else if (b > c)
-        {
+          a + "!!");
+      }
+      else if (b > c) {
         alert("Bravo! " + document.getElementById("P2").value + " a gagné avec un score de " +
-        b + "!!");
-        }
-        else
-        {
+          b + "!!");
+      }
+      else {
         alert("Bravo! " + document.getElementById("P3").value + " a gagné avec un score de " +
-        c + "!!");
-        }
+          c + "!!");
       }
+    }
 
-      function Ajout() {
-        if (numberOfPlayers < 9) {
-        document.getElementById("Scoreboard").insertRow(-1).innerHTML = '<tr><td><input type="text"></td><td ><input type="number"></td><td ><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td></td></tr>'; 
+    function Ajout() {
+      if (numberOfPlayers < 8) {
         numberOfPlayers += 1;
-        }
+        let id1 = `Score${numberOfPlayers}`
+        
+        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input type="text"></td><td ><input type="number"></td><td ><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td id="${id1}"></td></tr>`;
+        
       }
-        // $("table > tr").each(function() {
-        //   console.log($("td"));//});
-  
-      function Retrait() {
-        if(numberOfPlayers > 3) {
-          let table = document.getElementById("Scoreboard");
-          let rowCount = table.rows.length;
-          table.deleteRow(rowCount - 1);
-          numberOfPlayers -= 1;
-          console.log(rowCount);
-        }
+    }
+    // $("table > tr").each(function() {
+    //   console.log($("td"));//});
+
+    function Retrait() {
+      if (numberOfPlayers > 3) {
+        // Delete a player in the scoreboard only if nb of players > 3
+        let table = document.getElementById("Scoreboard");
+        let rowCount = table.rows.length;
+        table.deleteRow(rowCount - 1);
+        numberOfPlayers -= 1;
 
       }
+
+    }
+
+    function Test() {
+      let table = document.getElementById("Scoreboard");
       
-    </script>
-  
-  </body>
+      for (let i = 1; i < numberOfPlayers + 1; i++) {
+        let currentCell = table.rows.item(i).cells;
+        let cellLength = 8;
+        let Score = 0;
+
+        for (let j = 1; j < cellLength - 1; j++) {
+          // on commence à 1 car la premiere case est pour le nom du joueur et on s'arrete à l'avant derniere 
+          // car c'est celle des scores
+          let cellValue = Number(currentCell[j].firstChild.value);
+          console.log(numberOfPlayers)
+
+          
+          Score = Score + cellValue;
+          document.getElementById(`Score${i}`).innerHTML = Score;
+        }
+        //console.log(`Score${i}`);
+        
+        
+      }
+
+
+
+
+    }
+
+
+  </script>
+
+</body>
+
 </html>
