@@ -24,7 +24,7 @@
       <td>Total</td>
     </tr>
     <tr>
-      <td><input id="P1" type="text"></td>
+      <td><input id="Player1" type="text"></td>
       <td id="Militaire"><input id="test" type="number"></td>
       <td id="Pieces"><input id="test2" type="number"></td>
       <td><input id="test3" type="number"></td>
@@ -36,7 +36,7 @@
     </tr>
 
     <tr>
-      <td><input id="P2" type="text"></td>
+      <td><input id="Player2" type="text"></td>
       <td id="Militaire"><input id="test7" type="number"></td>
       <td id="Pieces"><input id="test8" type="number"></td>
       <td><input id="test9" type="number"></td>
@@ -48,7 +48,7 @@
     </tr>
 
     <tr>
-      <td><input id="P3" type="text"></td>
+      <td><input id="Player3" type="text"></td>
       <td id="Militaire"><input id="P3_1" type="number"></td>
       <td id="Pieces"><input id="P3_2" type="number"></td>
       <td><input id="P3_3" type="number"></td>
@@ -64,6 +64,7 @@
   <button id="Ajout" onclick="Ajout">Ajouter un joueur</button>
   <button id="Retrait" onclick="Retrait">Supprimer un joueur</button>
   <button id="Test" onclick="Test">Test</button>
+  <button id="Test2" onclick="Test2">Test2</button>
   <script>
     let numberOfPlayers = 3;
     document.getElementById("CalculScore").addEventListener("click", CalculScore);
@@ -71,6 +72,7 @@
     document.getElementById("Ajout").addEventListener("click", Ajout);
     document.getElementById("Retrait").addEventListener("click", Retrait);
     document.getElementById("Test").addEventListener("click", Test);
+    document.getElementById("Test2").addEventListener("click", Test2);
     function CalculScore() {
       document.getElementById("Score1").innerHTML = Number(document.getElementById("test").value)
         + Number(document.getElementById("test2").value) + Number(document.getElementById("test3").value)
@@ -100,15 +102,15 @@
       b = Number(document.getElementById("Score2").innerHTML);
       c = Number(document.getElementById("Score3").innerHTML);
       if (a > b && a > c) {
-        alert("Bravo! " + document.getElementById("P1").value + " a gagné avec un score de " +
+        alert("Bravo! " + document.getElementById("Player1").value + " a gagné avec un score de " +
           a + "!!");
       }
       else if (b > c) {
-        alert("Bravo! " + document.getElementById("P2").value + " a gagné avec un score de " +
+        alert("Bravo! " + document.getElementById("Player2").value + " a gagné avec un score de " +
           b + "!!");
       }
       else {
-        alert("Bravo! " + document.getElementById("P3").value + " a gagné avec un score de " +
+        alert("Bravo! " + document.getElementById("Player3").value + " a gagné avec un score de " +
           c + "!!");
       }
     }
@@ -116,9 +118,9 @@
     function Ajout() {
       if (numberOfPlayers < 8) {
         numberOfPlayers += 1;
-        let id1 = `Score${numberOfPlayers}`
-        
-        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input type="text"></td><td ><input type="number"></td><td ><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td id="${id1}"></td></tr>`;
+        let id1 = `Score${numberOfPlayers}`;
+        let id2 = `Player${numberOfPlayers}`;
+        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" value="${id2}" type="text"></td><td ><input type="number"></td><td ><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td id="${id1}"></td></tr>`;
         
       }
     }
@@ -165,6 +167,18 @@
 
     }
 
+    function Test2() {
+      let maxValue = 0;
+      let winner = 0;
+      for(let i = 1; i < numberOfPlayers+1; i++) {
+        if(Number(document.getElementById(`Score${i}`).innerHTML) > maxValue) {
+          maxValue = document.getElementById(`Score${i}`).innerHTML;
+          winner = document.getElementById(`Player${i}`).innerHTML;
+        }
+      }
+      console.log(maxValue);
+      console.log(winner);
+    }
 
   </script>
 
