@@ -12,7 +12,9 @@
 <body>
   <div>Hello world test</div>
   <h1>7 wonders scoreboard</h1>
-  <table id="Scoreboard">
+  <table id="Scoreboard"> 
+    <!--Create the start table for 3 players with the id for the player name and score 
+      (need for the score calculation and winner announce)-->
     <tr>
       <td>Nom</td>
       <td>Militaire</td>
@@ -25,97 +27,93 @@
     </tr>
     <tr>
       <td><input id="Player1" type="text"></td>
-      <td id="Militaire"><input id="test" type="number"></td>
-      <td id="Pieces"><input id="test2" type="number"></td>
-      <td><input id="test3" type="number"></td>
-      <td><input id="test4" type="number"></td>
-      <td><input id="test5" type="number"></td>
-      <td><input id="test6" type="number"></td>
+      <td ><input type="number"></td>
+      <td ><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
       <td id="Score1"></td>
 
     </tr>
 
     <tr>
       <td><input id="Player2" type="text"></td>
-      <td id="Militaire"><input id="test7" type="number"></td>
-      <td id="Pieces"><input id="test8" type="number"></td>
-      <td><input id="test9" type="number"></td>
-      <td><input id="test10" type="number"></td>
-      <td><input id="test11" type="number"></td>
-      <td><input id="test12" type="number"></td>
+      <td ><input type="number"></td>
+      <td ><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
       <td id="Score2"></td>
 
     </tr>
 
     <tr>
       <td><input id="Player3" type="text"></td>
-      <td id="Militaire"><input id="P3_1" type="number"></td>
-      <td id="Pieces"><input id="P3_2" type="number"></td>
-      <td><input id="P3_3" type="number"></td>
-      <td><input id="P3_4" type="number"></td>
-      <td><input id="P3_5" type="number"></td>
-      <td><input id="P3_6" type="number"></td>
+      <td ><input type="number"></td>
+      <td ><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
       <td id="Score3"></td>
 
     </tr>
   </table>
   <button id="CalculScore" onclick="CalculScore">Calcul des scores</button>
-  <button id="Gagnant" onclick="Gagnant">Vainqueur ?</button>
+  <button id="Winner" onclick="Gagnant">Vainqueur ?</button>
   <button id="Ajout" onclick="Ajout">Ajouter un joueur</button>
   <button id="Retrait" onclick="Retrait">Supprimer un joueur</button>
   <button id="Test" onclick="Test">Test</button>
-  <button id="Test2" onclick="Test2">Test2</button>
+  
   <script>
     let numberOfPlayers = 3;
     document.getElementById("CalculScore").addEventListener("click", CalculScore);
-    document.getElementById("Gagnant").addEventListener("click", Gagnant);
+    document.getElementById("Winner").addEventListener("click", Winner);
     document.getElementById("Ajout").addEventListener("click", Ajout);
     document.getElementById("Retrait").addEventListener("click", Retrait);
     document.getElementById("Test").addEventListener("click", Test);
     document.getElementById("Test2").addEventListener("click", Test2);
+
+
     function CalculScore() {
-      document.getElementById("Score1").innerHTML = Number(document.getElementById("test").value)
-        + Number(document.getElementById("test2").value) + Number(document.getElementById("test3").value)
-        + Number(document.getElementById("test4").value) + Number(document.getElementById("test5").value)
-        + Number(document.getElementById("test6").value);
+      let table = document.getElementById("Scoreboard");
+      // loop to calc the score
+      for (let i = 1; i < numberOfPlayers + 1; i++) { // start a 1 because 0 is columns name, +1 to stop at number of players 
+        let currentCell = table.rows.item(i).cells;
+        let cellLength = 8;
+        let Score = 0;
 
-      document.getElementById("Score2").innerHTML = Number(document.getElementById("test7").value)
-        + Number(document.getElementById("test8").value) + Number(document.getElementById("test9").value)
-        + Number(document.getElementById("test10").value) + Number(document.getElementById("test11").value)
-        + Number(document.getElementById("test12").value);
+        for (let j = 1; j < cellLength - 1; j++) {
+          // start at 1 because 0 is player name, -1 to stop before the last columns which is for the score
+          let cellValue = Number(currentCell[j].firstChild.value);
+          Score = Score + cellValue;
+          document.getElementById(`Score${i}`).innerHTML = Score;
+        }
 
-      document.getElementById("Score3").innerHTML = Number(document.getElementById("P3_1").value)
-        + Number(document.getElementById("P3_2").value) + Number(document.getElementById("P3_3").value)
-        + Number(document.getElementById("P3_4").value) + Number(document.getElementById("P3_5").value)
-        + Number(document.getElementById("P3_6").value);
-
-
-      //console.log(document.getElementById("Score2").innerHTML);
-      //console.log(Number(document.getElementById("Score3").innerHTML));
-      console.log(Math.max(Number(document.getElementById("Score1").innerHTML),
-        Number(document.getElementById("Score2").innerHTML), Number(document.getElementById("Score3").innerHTML)));
+      }
+        
+        
     }
 
-    function Gagnant() {
-      max_val = 0;
-      a = Number(document.getElementById("Score1").innerHTML);
-      b = Number(document.getElementById("Score2").innerHTML);
-      c = Number(document.getElementById("Score3").innerHTML);
-      if (a > b && a > c) {
-        alert("Bravo! " + document.getElementById("Player1").value + " a gagné avec un score de " +
-          a + "!!");
+    function Winner() {
+      let maxValue = 0;
+      let winner = "";
+      for(let i = 1; i < numberOfPlayers+1; i++) {
+        // the loop will get each score and compare it to the maxValue
+        // if > maxValue store the value and the player name then announce the winner and his score
+        if(Number(document.getElementById(`Score${i}`).innerHTML) > maxValue) {
+          maxValue = document.getElementById(`Score${i}`).innerHTML;
+          winner = document.getElementById(`Player${i}`).value;
+        }
       }
-      else if (b > c) {
-        alert("Bravo! " + document.getElementById("Player2").value + " a gagné avec un score de " +
-          b + "!!");
-      }
-      else {
-        alert("Bravo! " + document.getElementById("Player3").value + " a gagné avec un score de " +
-          c + "!!");
-      }
+      
+      alert(`Bravo !! ${winner} a gagné avec un score de ${maxValue} !!`);
     }
 
     function Ajout() {
+      //Add a row for a new player (max 8) with an id for player name and player score (use in CalculScore and Winner)
       if (numberOfPlayers < 8) {
         numberOfPlayers += 1;
         let id1 = `Score${numberOfPlayers}`;
@@ -124,12 +122,10 @@
         
       }
     }
-    // $("table > tr").each(function() {
-    //   console.log($("td"));//});
 
     function Retrait() {
+      // Delete a player in the scoreboard only if nb of players > 3
       if (numberOfPlayers > 3) {
-        // Delete a player in the scoreboard only if nb of players > 3
         let table = document.getElementById("Scoreboard");
         let rowCount = table.rows.length;
         table.deleteRow(rowCount - 1);
@@ -157,29 +153,10 @@
           Score = Score + cellValue;
           document.getElementById(`Score${i}`).innerHTML = Score;
         }
-        //console.log(`Score${i}`);
-        
         
       }
 
-
-
-
     }
-
-    function Test2() {
-      let maxValue = 0;
-      let winner = "";
-      for(let i = 1; i < numberOfPlayers+1; i++) {
-        if(Number(document.getElementById(`Score${i}`).innerHTML) > maxValue) {
-          maxValue = document.getElementById(`Score${i}`).innerHTML;
-          winner = document.getElementById(`Player${i}`).value;
-        }
-      }
-      
-      alert(`Bravo !! ${winner} a gagné avec un score de ${maxValue} !!`);
-    }
-
   </script>
 
 </body>
