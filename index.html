@@ -10,9 +10,9 @@
 </head>
 
 <body>
-  <div>Hello world test</div>
+
   <h1>7 wonders scoreboard</h1>
-  <table id="Scoreboard"> 
+  <table id="Scoreboard">
     <!--Create the start table for 3 players with the id for the player name and score 
       (need for the score calculation and winner announce)-->
     <tr>
@@ -27,8 +27,8 @@
     </tr>
     <tr>
       <td><input id="Player1" type="text"></td>
-      <td ><input type="number"></td>
-      <td ><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
       <td><input type="number"></td>
       <td><input type="number"></td>
       <td><input type="number"></td>
@@ -39,8 +39,8 @@
 
     <tr>
       <td><input id="Player2" type="text"></td>
-      <td ><input type="number"></td>
-      <td ><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
       <td><input type="number"></td>
       <td><input type="number"></td>
       <td><input type="number"></td>
@@ -51,8 +51,8 @@
 
     <tr>
       <td><input id="Player3" type="text"></td>
-      <td ><input type="number"></td>
-      <td ><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
       <td><input type="number"></td>
       <td><input type="number"></td>
       <td><input type="number"></td>
@@ -62,19 +62,22 @@
     </tr>
   </table>
   <button id="CalculScore" onclick="CalculScore">Calcul des scores</button>
-  <button id="Winner" onclick="Gagnant">Vainqueur ?</button>
+  <button id="Winner" onclick="Winner">Vainqueur ?</button>
   <button id="Ajout" onclick="Ajout">Ajouter un joueur</button>
   <button id="Retrait" onclick="Retrait">Supprimer un joueur</button>
   <button id="Test" onclick="Test">Test</button>
-  
+  <button id="NewScore" onclick="NewScore">Supprimer les scores</button>
+  <button id="NewGame" onclick="NewGame">Nouveau jeu</button>
+
   <script>
     let numberOfPlayers = 3;
     document.getElementById("CalculScore").addEventListener("click", CalculScore);
     document.getElementById("Winner").addEventListener("click", Winner);
     document.getElementById("Ajout").addEventListener("click", Ajout);
     document.getElementById("Retrait").addEventListener("click", Retrait);
+    document.getElementById("NewScore").addEventListener("click", NewScore);
+    document.getElementById("NewGame").addEventListener("click", NewGame);
     document.getElementById("Test").addEventListener("click", Test);
-    document.getElementById("Test2").addEventListener("click", Test2);
 
 
     function CalculScore() {
@@ -93,22 +96,22 @@
         }
 
       }
-        
-        
+
+
     }
 
     function Winner() {
       let maxValue = 0;
       let winner = "";
-      for(let i = 1; i < numberOfPlayers+1; i++) {
+      for (let i = 1; i < numberOfPlayers + 1; i++) {
         // the loop will get each score and compare it to the maxValue
         // if > maxValue store the value and the player name then announce the winner and his score
-        if(Number(document.getElementById(`Score${i}`).innerHTML) > maxValue) {
+        if (Number(document.getElementById(`Score${i}`).innerHTML) > maxValue) {
           maxValue = document.getElementById(`Score${i}`).innerHTML;
           winner = document.getElementById(`Player${i}`).value;
         }
       }
-      
+
       alert(`Bravo !! ${winner} a gagné avec un score de ${maxValue} !!`);
     }
 
@@ -118,8 +121,8 @@
         numberOfPlayers += 1;
         let id1 = `Score${numberOfPlayers}`;
         let id2 = `Player${numberOfPlayers}`;
-        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" value="${id2}" type="text"></td><td ><input type="number"></td><td ><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td id="${id1}"></td></tr>`;
-        
+        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" value="Joueur ${numberOfPlayers}" type="text"></td><td ><input type="number"></td><td ><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td id="${id1}"></td></tr>`;
+
       }
     }
 
@@ -135,25 +138,65 @@
 
     }
 
-    function Test() {
+    function NewScore() {
       let table = document.getElementById("Scoreboard");
-      
-      for (let i = 1; i < numberOfPlayers + 1; i++) {
+      // loop to delete value in cell
+      for (let i = 1; i < numberOfPlayers + 1; i++) { // start a 1 because 0 is columns name, +1 to stop at number of players 
         let currentCell = table.rows.item(i).cells;
         let cellLength = 8;
-        let Score = 0;
 
         for (let j = 1; j < cellLength - 1; j++) {
-          // on commence à 1 car la premiere case est pour le nom du joueur et on s'arrete à l'avant derniere 
-          // car c'est celle des scores
-          let cellValue = Number(currentCell[j].firstChild.value);
-          console.log(numberOfPlayers)
 
-          
-          Score = Score + cellValue;
-          document.getElementById(`Score${i}`).innerHTML = Score;
+          currentCell[j].firstChild.value = "";
         }
-        
+        document.getElementById(`Score${i}`).innerHTML = "";
+      }
+    }
+
+    function NewGame() {
+      // function to reset the scoreboard
+      let table = document.getElementById("Scoreboard");
+      let newNumberOfPlayers = 3;
+      // loop to delete value in cell for players 1 to 3
+      for (let i = 1; i < newNumberOfPlayers + 1; i++) { // start a 1 because 0 is columns name, +1 to stop at number of players 
+        let currentCell = table.rows.item(i).cells;
+        let cellLength = currentCell.length;
+
+        for (let j = 1; j < cellLength - 1; j++) {
+
+          currentCell[j].firstChild.value = "";
+        }
+        document.getElementById(`Score${i}`).innerHTML = "";
+        document.getElementById(`Player${i}`).value = "";
+      }
+      // loop to delete row after player 3
+      for (numberOfPlayers; numberOfPlayers > newNumberOfPlayers; numberOfPlayers--) {
+        table.deleteRow(numberOfPlayers);
+      }
+
+    }
+
+
+
+
+    function Test() {
+      let table = document.getElementById("Scoreboard");
+      // loop to delete value in cell
+      let newNumberOfPlayers = 3;
+      for (let i = 1; i < newNumberOfPlayers + 1; i++) { // start a 1 because 0 is columns name, +1 to stop at number of players 
+        let currentCell = table.rows.item(i).cells;
+        let cellLength = currentCell.length;
+
+        for (let j = 1; j < cellLength - 1; j++) {
+
+          currentCell[j].firstChild.value = "";
+        }
+        document.getElementById(`Score${i}`).innerHTML = "";
+        document.getElementById(`Player${i}`).value = "";
+      }
+
+      for (numberOfPlayers; numberOfPlayers > newNumberOfPlayers; numberOfPlayers--) {
+        table.deleteRow(numberOfPlayers);
       }
 
     }
