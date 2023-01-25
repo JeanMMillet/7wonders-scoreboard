@@ -6,27 +6,28 @@
   <meta name="viewport" content="width=device-width" />
   <title>7 wonders scoreboards</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="style.css"  type="text/css" />
 </head>
 
 <body>
 
   <h1>7 wonders scoreboard</h1>
+
   <table id="Scoreboard">
     <!--Create the start table for 3 players with the id for the player name and score 
       (need for the score calculation and winner announce)-->
     <tr>
-      <td>Nom</td>
-      <td>Militaire</td>
-      <td>Pièces</td>
-      <td>Merveille</td>
-      <td>Bleu</td>
-      <td>Jaune</td>
-      <td>Vert</td>
-      <td>Total</td>
+      <th>Nom</th>
+      <th class="militaire">Militaire</th>
+      <th>Pièces</th>
+      <th>Merveille</th>
+      <th>Bleu</th>
+      <th>Jaune</th>
+      <th>Vert</th>
+      <th>Score</th>
     </tr>
     <tr>
-      <td><input id="Player1" type="text"></td>
+      <td><input ></td>
       <td><input type="number"></td>
       <td><input type="number"></td>
       <td><input type="number"></td>
@@ -61,6 +62,8 @@
 
     </tr>
   </table>
+
+  
   <button id="CalculScore" onclick="CalculScore">Calcul des scores</button>
   <button id="Winner" onclick="Winner">Vainqueur ?</button>
   <button id="Ajout" onclick="Ajout">Ajouter un joueur</button>
@@ -68,6 +71,8 @@
   <button id="Test" onclick="Test">Test</button>
   <button id="NewScore" onclick="NewScore">Supprimer les scores</button>
   <button id="NewGame" onclick="NewGame">Nouveau jeu</button>
+
+
 
   <script>
     let numberOfPlayers = 3;
