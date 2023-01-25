@@ -1,9 +1,9 @@
-table {
-    border: 1;
+/*table {
+    border: 1px solid black;
     margin-left: auto;
     margin-right: auto;
 
-}
+} */
 
 h1{
     text-align: center;
@@ -12,7 +12,9 @@ h1{
 body{
     background-color: blanchedalmond;
 }
-
+#Scoreboard{
+    border-style: solid;
+}
 input{
     width: 4em;
 }
