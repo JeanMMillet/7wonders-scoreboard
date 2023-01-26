@@ -16,9 +16,19 @@
   <table id="Scoreboard">
     <!--Create the start table for 3 players with the id for the player name and score 
       (need for the score calculation and winner announce)-->
+    <colgroup>
+      <col class="playerName">
+      <col class="militaire">
+      <col class="coins">
+      <col class="wonder">
+      <col class="civil">
+      <col class="commerce">
+      <col class="science">
+      <col class="score">
+    </colgroup>  
     <tr>
       <th>Nom</th>
-      <th class="militaire">Militaire</th>
+      <th>Militaire</th>
       <th>Pièces</th>
       <th>Merveille</th>
       <th>Bleu</th>
@@ -27,7 +37,7 @@
       <th>Score</th>
     </tr>
     <tr>
-      <td><input ></td>
+      <td><input id="Player1" type="text"></td>
       <td><input type="number"></td>
       <td><input type="number"></td>
       <td><input type="number"></td>
@@ -63,15 +73,15 @@
     </tr>
   </table>
 
-  
-  <button id="CalculScore" onclick="CalculScore">Calcul des scores</button>
-  <button id="Winner" onclick="Winner">Vainqueur ?</button>
-  <button id="Ajout" onclick="Ajout">Ajouter un joueur</button>
-  <button id="Retrait" onclick="Retrait">Supprimer un joueur</button>
-  <button id="Test" onclick="Test">Test</button>
-  <button id="NewScore" onclick="NewScore">Supprimer les scores</button>
-  <button id="NewGame" onclick="NewGame">Nouveau jeu</button>
-
+  <div id="testBouton">
+  <button class="bouton" id="CalculScore" onclick="CalculScore">Calcul des scores</button>
+  <button class="bouton" id="Winner" onclick="Winner">Vainqueur ?</button>
+  <button class="bouton" id="Ajout" onclick="Ajout">Ajouter un joueur</button>
+  <button class="bouton" id="Retrait" onclick="Retrait">Supprimer un joueur</button>
+  <button class="bouton" id="Test" onclick="Test">Test</button>
+  <button class="bouton" id="NewScore" onclick="NewScore">Supprimer les scores</button>
+  <button class="bouton" id="NewGame" onclick="NewGame">Nouveau jeu</button>
+  </div>
 
 
   <script>
