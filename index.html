@@ -38,36 +38,36 @@
     </tr>
     <tr>
       <td><input id="Player1" type="text"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number" onclick="sciencePoints()"></td>
       <td id="Score1"></td>
 
     </tr>
 
     <tr>
       <td><input id="Player2" type="text"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number" onclick="sciencePoints()"></td>
       <td id="Score2"></td>
 
     </tr>
 
     <tr>
       <td><input id="Player3" type="text"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
-      <td><input type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number"></td>
+      <td><input class="points" type="number" onclick="sciencePoints()"></td>
       <td id="Score3"></td>
 
     </tr>
@@ -83,16 +83,48 @@
   <button class="bouton" id="NewGame" onclick="NewGame">Nouveau jeu</button>
   </div>
 
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="content">
+        <label for="wheel">Nombre de cartes "Roue"</label>
+        <input id="wheel" name="wheel" type="number">
+      </div>
+      <div class="content">
+        <label for="compass">Nombre de cartes "Compas"</label>
+        <input id="compass" name="compass" type="number">
+      </div>
+      <div class="content">
+        <label for="tablet">Nombre de cartes "Tablette"</label>
+        <input id="tablet" name="tablet" type="number">
+      </div>
+      <button id="test" class="content">Test</button>
+
+    </div>
+  
+  </div>
 
   <script>
     let numberOfPlayers = 3;
+    var clickedInput;
     document.getElementById("CalculScore").addEventListener("click", CalculScore);
     document.getElementById("Winner").addEventListener("click", Winner);
     document.getElementById("Ajout").addEventListener("click", Ajout);
     document.getElementById("Retrait").addEventListener("click", Retrait);
     document.getElementById("NewScore").addEventListener("click", NewScore);
     document.getElementById("NewGame").addEventListener("click", NewGame);
-    document.getElementById("Test").addEventListener("click", Test);
+    document.getElementById("Test").onclick = function() {document.getElementById("myModal").style.display = "block";}
+   
+    
+
+    document.getElementById("test").addEventListener("click", SciencePointsCalc);
+    
+
+    let span = document.getElementsByClassName("close")[0];
+    span.onclick = function(){document.getElementById("myModal").style.display = "none";}
+    
 
 
     function CalculScore() {
@@ -106,7 +138,13 @@
         for (let j = 1; j < cellLength - 1; j++) {
           // start at 1 because 0 is player name, -1 to stop before the last columns which is for the score
           let cellValue = Number(currentCell[j].firstChild.value);
-          Score = Score + cellValue;
+          if(j == 2){
+            Score = Score + Math.floor(cellValue/3)
+          }
+          else {
+            Score = Score + cellValue;
+           
+          } 
           document.getElementById(`Score${i}`).innerHTML = Score;
         }
 
@@ -136,7 +174,7 @@
         numberOfPlayers += 1;
         let id1 = `Score${numberOfPlayers}`;
         let id2 = `Player${numberOfPlayers}`;
-        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" value="Joueur ${numberOfPlayers}" type="text"></td><td ><input type="number"></td><td ><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td id="${id1}"></td></tr>`;
+        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" value="Joueur ${numberOfPlayers}" type="text"></td><td ><input class="points" type="number"></td><td ><input class="points" type="number"></td><td><input class="points" type="number"></td><td><input class="points" type="number"></td><td><input class="points" type="number"></td><td><input class="points" onclick="sciencePoints()" type="number"></td><td id="${id1}"></td></tr>`;
 
       }
     }
@@ -194,25 +232,31 @@
 
 
 
-    function Test() {
-      let table = document.getElementById("Scoreboard");
-      // loop to delete value in cell
-      let newNumberOfPlayers = 3;
-      for (let i = 1; i < newNumberOfPlayers + 1; i++) { // start a 1 because 0 is columns name, +1 to stop at number of players 
-        let currentCell = table.rows.item(i).cells;
-        let cellLength = currentCell.length;
+    function sciencePoints() {
+      window.clickedInput = document.activeElement;
+      console.log(document.activeElement);
+      document.getElementById("myModal").style.display = "flex";
+      
+    }
 
-        for (let j = 1; j < cellLength - 1; j++) {
-
-          currentCell[j].firstChild.value = "";
-        }
-        document.getElementById(`Score${i}`).innerHTML = "";
-        document.getElementById(`Player${i}`).value = "";
+    function SciencePointsCalc() {
+      let nbWheel = Number(document.getElementById("wheel").value);
+      let nbCompass = Number(document.getElementById("compass").value);
+      let nbTablet = Number(document.getElementById("tablet").value);
+      let bonusScore = 0;
+      let Score = 0;
+      console.log(window.clickedInput)
+      for(let nbBonus = 0; nbBonus <= nbWheel && nbBonus <= nbCompass && nbBonus <= nbTablet; nbBonus ++){
+        bonusScore = 7 * nbBonus
       }
 
-      for (numberOfPlayers; numberOfPlayers > newNumberOfPlayers; numberOfPlayers--) {
-        table.deleteRow(numberOfPlayers);
-      }
+      Score = nbCompass **2 + nbTablet **2 + nbWheel **2 + bonusScore
+      window.clickedInput.value = Score;
+      console.log(bonusScore);
+      console.log(window.clickedInput.value);
+      document.getElementById("myModal").style.display = "none";
+    
+
 
     }
   </script>
