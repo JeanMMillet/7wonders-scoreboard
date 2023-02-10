@@ -74,33 +74,45 @@
   </table>
 
   <div id="testBouton">
-  <button class="bouton" id="CalculScore" onclick="CalculScore">Calcul des scores</button>
-  <button class="bouton" id="Winner" onclick="Winner">Vainqueur ?</button>
-  <button class="bouton" id="Ajout" onclick="Ajout">Ajouter un joueur</button>
-  <button class="bouton" id="Retrait" onclick="Retrait">Supprimer un joueur</button>
-  <button class="bouton" id="Test" onclick="Test">Test</button>
-  <button class="bouton" id="NewScore" onclick="NewScore">Supprimer les scores</button>
-  <button class="bouton" id="NewGame" onclick="NewGame">Nouveau jeu</button>
+  <button class="bouton" id="CalculScore" onclick="CalculScore()">Calcul des scores</button>
+  <button class="bouton" id="Winner" onclick="Winner()">Vainqueur ?</button>
+  <button class="bouton" id="Ajout" onclick="Ajout()">Ajouter un joueur</button>
+  <button class="bouton" id="Retrait" onclick="Retrait()">Supprimer un joueur</button>
+  
+  <button class="bouton" id="NewScore" onclick="NewScore()">Supprimer les scores</button>
+  <button class="bouton" id="NewGame" onclick="NewGame()">Nouveau jeu</button>
   </div>
 
   <div id="myModal" class="modal">
 
     <!-- Modal content -->
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <div class="content">
-        <label for="wheel">Nombre de cartes "Roue"</label>
-        <input id="wheel" name="wheel" type="number">
+
+      <div id="modalTop">
+        <button id="close" onclick="CloseModal()">&#x2716;</button>
       </div>
-      <div class="content">
-        <label for="compass">Nombre de cartes "Compas"</label>
-        <input id="compass" name="compass" type="number">
+      
+      <div id="modalBody">
+        <div class="content">
+          <label for="wheel">Nombre de cartes "Roue"</label>
+          <input id="wheel" name="wheel" type="number">
+        </div>
+        <div class="content">
+          <label for="compass">Nombre de cartes "Compas"</label>
+          <input id="compass" name="compass" type="number">
+        </div>
+        <div class="content">
+          <label for="tablet">Nombre de cartes "Tablette"</label>
+          <input id="tablet" name="tablet" type="number">
+        </div>
       </div>
-      <div class="content">
-        <label for="tablet">Nombre de cartes "Tablette"</label>
-        <input id="tablet" name="tablet" type="number">
+      
+      <div id="modalBottom">      
+        <button class = "modalButton" onclick="CloseModal()">Annuler</button>
+        <button class = "modalButton" onclick="SciencePointsCalc()">Calcul des points</button>
+        
       </div>
-      <button id="test" class="content">Test</button>
+
 
     </div>
   
@@ -109,23 +121,6 @@
   <script>
     let numberOfPlayers = 3;
     var clickedInput;
-    document.getElementById("CalculScore").addEventListener("click", CalculScore);
-    document.getElementById("Winner").addEventListener("click", Winner);
-    document.getElementById("Ajout").addEventListener("click", Ajout);
-    document.getElementById("Retrait").addEventListener("click", Retrait);
-    document.getElementById("NewScore").addEventListener("click", NewScore);
-    document.getElementById("NewGame").addEventListener("click", NewGame);
-    document.getElementById("Test").onclick = function() {document.getElementById("myModal").style.display = "block";}
-   
-    
-
-    document.getElementById("test").addEventListener("click", SciencePointsCalc);
-    
-
-    let span = document.getElementsByClassName("close")[0];
-    span.onclick = function(){document.getElementById("myModal").style.display = "none";}
-    
-
 
     function CalculScore() {
       let table = document.getElementById("Scoreboard");
@@ -229,9 +224,6 @@
 
     }
 
-
-
-
     function sciencePoints() {
       window.clickedInput = document.activeElement;
       console.log(document.activeElement);
@@ -254,10 +246,14 @@
       window.clickedInput.value = Score;
       console.log(bonusScore);
       console.log(window.clickedInput.value);
+      document.getElementById("tablet").value = document.getElementById("wheel").value =document.getElementById("compass").value = "";
       document.getElementById("myModal").style.display = "none";
-    
+  
+    }
 
-
+    function CloseModal() {
+      document.getElementById("tablet").value = document.getElementById("wheel").value =document.getElementById("compass").value = "";
+      document.getElementById("myModal").style.display = "none";
     }
   </script>
 
