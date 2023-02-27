@@ -83,37 +83,51 @@
   <button class="bouton" id="NewGame" onclick="NewGame()">Nouveau jeu</button>
   </div>
 
+
+
+
   <div id="myModal" class="modal">
 
     <!-- Modal content -->
-    <div class="modal-content">
 
-      <div id="modalTop">
+    <div class="modal-content">
+      <div class="modalHeader">
+        <span class="modalTitle">Calcul des points Sciences</span>
         <button id="close" onclick="CloseModal()">&#x2716;</button>
-      </div>
+      </div>  
       
-      <div id="modalBody">
-        <div class="content">
-          <label for="wheel">Nombre de cartes "Roue"</label>
-          <input id="wheel" name="wheel" type="number">
-        </div>
-        <div class="content">
-          <label for="compass">Nombre de cartes "Compas"</label>
-          <input id="compass" name="compass" type="number">
-        </div>
-        <div class="content">
-          <label for="tablet">Nombre de cartes "Tablette"</label>
-          <input id="tablet" name="tablet" type="number">
-        </div>
+      <div class="modalBody">
+        <form action="" oninput="wheelNumber.value=parseInt(wheel.value)">
+          <label for="wheel">Nombre de cartes Roue</label>
+          <input id="wheel" name="wheel" type="range" max="4" value="2">
+          <output for="wheel" name="wheelNumber" id="wheelNumber">2</output>
+        </form> 
+
+        <form action="" oninput="compassNumber.value=parseInt(compass.value)">
+          <label for="compass">Nombre de cartes Compas</label>
+          <input id="compass" name="compass" type="range" max="4" value="2">
+          <output for="compass" name="compassNumber" id="compassNumber">2</output>
+        </form>
+        
+        <form action="" oninput="tabletNumber.value=parseInt(tablet.value)">
+          <label for="tablet">Nombre de cartes Tablette</label>
+          <input id="tablet" name="tablet" type="range" max="4" value="2">
+          <output for="tablet" name="tabletNumber" id="tabletNumber">2</output>
+        </form>
+
+        
       </div>
-      
-      <div id="modalBottom">      
+
+      <div class="modalBody2">
+        <input name="B" id="wonderBonus" type="checkbox">
+        <label for="B">Merveille ?? construite</label>
+      </div>
+         
+      <div class="modalFooter">
         <button class = "modalButton" onclick="CloseModal()">Annuler</button>
         <button class = "modalButton" onclick="SciencePointsCalc()">Calcul des points</button>
         
       </div>
-
-
     </div>
   
   </div>
@@ -237,7 +251,15 @@
       let nbTablet = Number(document.getElementById("tablet").value);
       let bonusScore = 0;
       let Score = 0;
+      let joker = 0;
       console.log(window.clickedInput)
+
+      if(document.getElementById("wonderBonus").checked) {
+        joker = 1;
+      }
+
+      
+      console.log(joker);
       for(let nbBonus = 0; nbBonus <= nbWheel && nbBonus <= nbCompass && nbBonus <= nbTablet; nbBonus ++){
         bonusScore = 7 * nbBonus
       }
@@ -247,12 +269,15 @@
       console.log(bonusScore);
       console.log(window.clickedInput.value);
       document.getElementById("tablet").value = document.getElementById("wheel").value =document.getElementById("compass").value = "";
+      document.getElementById("tabletNumber").value = document.getElementById("wheelNumber").value =document.getElementById("compassNumber").value = "2";
       document.getElementById("myModal").style.display = "none";
+      
   
     }
 
     function CloseModal() {
       document.getElementById("tablet").value = document.getElementById("wheel").value =document.getElementById("compass").value = "";
+      document.getElementById("tabletNumber").value = document.getElementById("wheelNumber").value =document.getElementById("compassNumber").value = "2";
       document.getElementById("myModal").style.display = "none";
     }
   </script>
