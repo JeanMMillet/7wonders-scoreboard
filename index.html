@@ -99,19 +99,19 @@
       <div class="modalBody">
         <form action="" oninput="wheelNumber.value=parseInt(wheel.value)">
           <label for="wheel">Nombre de cartes Roue</label>
-          <input id="wheel" name="wheel" type="range" max="4" value="2">
+          <input id="wheel" name="wheel" type="range" max="4" value="2" class="numberOfSymbols">
           <output for="wheel" name="wheelNumber" id="wheelNumber">2</output>
         </form> 
 
         <form action="" oninput="compassNumber.value=parseInt(compass.value)">
           <label for="compass">Nombre de cartes Compas</label>
-          <input id="compass" name="compass" type="range" max="4" value="2">
+          <input id="compass" class="numberOfSymbols" name="compass" type="range" max="4" value="2">
           <output for="compass" name="compassNumber" id="compassNumber">2</output>
         </form>
         
         <form action="" oninput="tabletNumber.value=parseInt(tablet.value)">
           <label for="tablet">Nombre de cartes Tablette</label>
-          <input id="tablet" name="tablet" type="range" max="4" value="2">
+          <input id="tablet" class="numberOfSymbols" name="tablet" type="range" max="4" value="2">
           <output for="tablet" name="tabletNumber" id="tabletNumber">2</output>
         </form>
 
@@ -240,7 +240,6 @@
 
     function sciencePoints() {
       window.clickedInput = document.activeElement;
-      console.log(document.activeElement);
       document.getElementById("myModal").style.display = "flex";
       
     }
@@ -252,22 +251,33 @@
       let bonusScore = 0;
       let Score = 0;
       let joker = 0;
-      console.log(window.clickedInput)
+      
+      let toto = [Number(document.getElementById("wheel").value),Number(document.getElementById("compass").value),Number(document.getElementById("tablet").value)];
+      toto = toto.sort();
+      // Create an array with the 3 values then sort it
 
+    
+      //Check if joker is the wonder joker is checked then add it to 1 sort of symbol to optimize score
       if(document.getElementById("wonderBonus").checked) {
         joker = 1;
+        if(toto[0] == toto[1] || toto[2] == 4) {// if [0] = [1] or [0] = 0 et [2] = 4 then add joker to [2] else to [0] 
+          toto[2] += joker 
+        }
+        else {
+          toto[0] += joker
+        }
       }
-
+           
+       //7 points for each complete series -> 7 * the smallest number of symbol
+      bonusScore = 7 * toto[0]
+      // 
       
-      console.log(joker);
-      for(let nbBonus = 0; nbBonus <= nbWheel && nbBonus <= nbCompass && nbBonus <= nbTablet; nbBonus ++){
-        bonusScore = 7 * nbBonus
-      }
+      
 
-      Score = nbCompass **2 + nbTablet **2 + nbWheel **2 + bonusScore
+      Score = toto[0] **2 + toto[1] **2 + toto[2] **2 + bonusScore
       window.clickedInput.value = Score;
-      console.log(bonusScore);
-      console.log(window.clickedInput.value);
+      //console.log(bonusScore);
+      //console.log(window.clickedInput.value);
       document.getElementById("tablet").value = document.getElementById("wheel").value =document.getElementById("compass").value = "";
       document.getElementById("tabletNumber").value = document.getElementById("wheelNumber").value =document.getElementById("compassNumber").value = "2";
       document.getElementById("myModal").style.display = "none";
