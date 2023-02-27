@@ -72,7 +72,12 @@ button:hover{
     background-color: aliceblue;
 }
 
-#myModal{
+
+
+/* Modal */
+
+
+.modal{
     z-index: 1;
     display: none;
     position: fixed;
@@ -90,65 +95,53 @@ button:hover{
     background-color: rgb(35, 173, 86, 1);
     width: 50%;
     height: 200px;
-    justify-content: right;
-    display: flex;
     
-    
-    flex-direction: column;
     margin-left: auto;
     margin-right: auto;
     
-    
+}
+
+.modalHeader{
+   margin-right: 0%;
+   margin-bottom: 2em;
     
 }
 
-#wheel, #tablet, #compass{
-    margin-left: 20px;
-    width: 5em;
-    height: 1em;
+.modalBody{
     
-}
-#test{
-    width: 10em;
-    justify-self: center;
-    justify-content: center;
-}
-
-.content{
     display: flex;
-    
+    justify-content: space-around; 
+    margin-bottom: 1em;
+    margin-left: 2.5em;
+    margin-right: auto;
+} 
+
+.modalBody2{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
 }
+
+.modalFooter{
+    float: right;
+    margin-bottom: 1em;
+    margin-right: 10%;
+}
+  
 #close{
     width: fit-content;
     border-radius: 30%;
-    margin-right: 1em;
+        
     background-color: aliceblue;
-    justify-content: center;
+    
+    float: right;
     cursor: pointer;
-    
-    
 }
-.modalButton{
-    width: 30%;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
+#modalTitle{
+    margin-top: 0%;
+    margin-bottom: 0%;
 
 }
-#modalTop{
-    text-align: end;
-    margin-top: 0rem;
-    margin-top: 2%;
-}
 
-#modalBody{
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    
-    flex-direction: column;
-}
-#modalBottom{
-    display: flex;
-    justify-content: space-around;
-}
+
+
