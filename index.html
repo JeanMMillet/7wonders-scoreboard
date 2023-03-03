@@ -92,8 +92,9 @@
 
     <div class="modal-content">
       <div class="modalHeader">
-        <span class="modalTitle">Calcul des points Sciences</span>
-        <button id="close" onclick="CloseModal()">&#x2716;</button>
+        <h1 class="modalTitle">Calcul des points Sciences pour</h1>
+        <!-- <button id="close" onclick="CloseModal()">&#x2716;</button> -->
+        <h2 id="activePlayer"></h2>
       </div>
 
       <div class="modalBody">
@@ -135,6 +136,7 @@
   <script>
     let numberOfPlayers = 3;
     var clickedInput;
+    var activePlayer;
 
     function CalculScore() {
       let table = document.getElementById("Scoreboard");
@@ -240,6 +242,12 @@
 
     function sciencePoints() {
       window.clickedInput = document.activeElement;
+      activePlayer = clickedInput.parentElement.parentElement.cells[0].children[0].value
+
+      console.log(activePlayer)
+
+
+      document.getElementById("activePlayer").innerText = activePlayer;
       document.getElementById("myModal").style.display = "flex";
 
     }
@@ -289,6 +297,7 @@
       document.getElementById("tablet").value = document.getElementById("wheel").value = document.getElementById("compass").value = "";
       document.getElementById("tabletNumber").value = document.getElementById("wheelNumber").value = document.getElementById("compassNumber").value = "2";
       document.getElementById("myModal").style.display = "none";
+      document.getElementById("wonderBonus").checked = false;
     }
   </script>
 

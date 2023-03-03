@@ -1,74 +1,84 @@
-
-h1{
+h1 {
     text-align: center;
 }
-   
-body{
+
+body {
     background-color: burlywood;
 }
-#Scoreboard{
+
+#Scoreboard {
     margin-left: auto;
     margin-right: auto;
     background-color: aliceblue;
 }
 
-tr:first-child{
+tr:first-child {
     background-color: black;
-    color: aliceblue ;
+    color: aliceblue;
 }
 
-table, td, th, tr{
+table,
+td,
+th,
+tr {
     border: solid;
     border-collapse: collapse;
     border-color: black;
 }
-input[type=number]{
+
+input[type=number] {
     width: 5em;
     -moz-appearance: textfield;
     border: none;
 
-}    
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
-input[type=text]{
+
+input[type=text] {
     width: 12em;
 }
 
-.points{
+.points {
     background-color: transparent;
 }
 
 
-.militaire{
+.militaire {
     background-color: crimson;
 }
 
-.coins{
+.coins {
     background-color: goldenrod;
 }
-.science{
+
+.science {
     background-color: green;
 }
-.civil{
+
+.civil {
     background-color: blue;
 }
-.wonder{
+
+.wonder {
     background-color: blanchedalmond;
 }
-.commerce{
+
+.commerce {
     background-color: gold;
 }
 
 
-#testBouton{
-   display: flex;
-   justify-content: center;
+#testBouton {
+    display: flex;
+    justify-content: center;
 }
 
-button:hover{
+button:hover {
     background-color: aliceblue;
 }
 
@@ -77,71 +87,97 @@ button:hover{
 /* Modal */
 
 
-.modal{
+.modal {
     z-index: 1;
     display: none;
     position: fixed;
     left: 0;
     top: 0;
-    background-color: rgb(0, 0, 0, 0.5 );
+    background-color: rgb(0, 0, 0, 0.5);
     width: 100%;
     height: 100%;
-    
+
 
 }
 
-.modal-content{
+.modal-content {
     margin-top: 10%;
     background-color: rgb(35, 173, 86, 1);
     width: 50%;
-    height: 200px;
-    
+    height: fit-content;
+    border-radius: 5px;
+
     margin-left: auto;
     margin-right: auto;
-    
+
 }
 
-.modalHeader{
-   margin-right: 0%;
-   margin-bottom: 2em;
-    
-}
-
-.modalBody{
-    
+.modalHeader {
     display: flex;
-    justify-content: space-around; 
+    margin-right: 0%;
+    margin-bottom: 2em;
+    align-items: center;
+    flex-direction: column;
+
+
+}
+
+.modalHeader h1 {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.modalHeader h2 {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    margin-top: 0.4rem;
+    text-align: center;
+    font-size: 2rem;
+    color: goldenrod;
+    font-style: italic;
+
+}
+
+
+
+.modalBody {
+
+    display: flex;
+    justify-content: space-around;
     margin-bottom: 1em;
     margin-left: 2.5em;
     margin-right: auto;
-} 
+}
 
-.modalBody2{
+.modalBody2 {
     display: flex;
     justify-content: center;
     margin-bottom: 1em;
 }
 
-.modalFooter{
+.modalFooter {
     float: right;
     margin-bottom: 1em;
     margin-right: 10%;
 }
-  
-#close{
+
+#close {
     width: fit-content;
     border-radius: 30%;
-        
-    background-color: aliceblue;
-    
+    border: none;
+
+    background-color: transparent;
+
     float: right;
     cursor: pointer;
 }
-#modalTitle{
+
+#modalTitle {
     margin-top: 0%;
     margin-bottom: 0%;
 
 }
-
-
-
