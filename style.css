@@ -138,8 +138,9 @@ button:hover {
 .modal-content {
     margin-top: 10%;
     background-color: rgb(35, 173, 86, 1);
-    width: 50%;
+    width: 40%;
     height: fit-content;
+
     border-radius: 5px;
 
     margin-left: auto;
@@ -184,26 +185,61 @@ button:hover {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1em;
-    margin-left: 2.5em;
+    width: 90%;
+    margin-left: auto;
     margin-right: auto;
     flex-direction: column;
 }
 
 .modalBody form {
     display: flex;
+    flex-direction: column;
+    align-content: space-around;
     margin-top: 1rem;
-    justify-content: space-around;
+    justify-content: center;
+}
+
+.modalBody form div {
+    display: flex;
+    height: 4rem;
+    align-items: center;
+}
+
+.modalBody form div * {
+    margin-left: 1rem;
+}
+
+
+.modalBody form div input {
+    width: 45%;
+    margin-left: 3rem;
+
+}
+
+img {
+    height: 2rem;
+    width: 2rem;
 }
 
 .modalBody2 {
     display: flex;
     justify-content: center;
+    flex-direction: column-reverse;
+    width: 50%;
+    margin: auto;
     margin-bottom: 1em;
+}
+
+.modalBody2 label {
+    text-align: center;
+    margin-bottom: 0.5rem;
 }
 
 .modalBody3 {
     display: flex;
     justify-content: center;
+    width: 50%;
+    margin: auto;
     font-size: 1.5rem;
 }
 
