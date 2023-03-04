@@ -127,7 +127,7 @@
 
       <div class="modalBody2">
         <input name="Joker" id="wonderBonus" type="checkbox" oninput="SciencePointsCalc2()">
-        <label for="Joker">Merveille ?? construite</label>
+        <label for="Joker">Merveille de Babylone construite</label>
       </div>
 
       <div class="modalBody3">
@@ -198,6 +198,10 @@
         document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" value="Joueur ${numberOfPlayers}" type="text"></td><td ><input class="points" type="number"></td><td ><input class="points" type="number"></td><td><input class="points" type="number"></td><td><input class="points" type="number"></td><td><input class="points" type="number"></td><td><input class="points" onclick="sciencePoints()" type="number"></td><td id="${id1}"></td></tr>`;
 
       }
+      else {
+        document.getElementById("Ajout").style.display = "none";
+      }
+      document.getElementById("Retrait").style.display = "flex";
     }
 
     function Retrait() {

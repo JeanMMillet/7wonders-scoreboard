@@ -78,12 +78,17 @@ input[type=text] {
     justify-content: center;
 }
 
+#Retrait {
+    display: none;
+}
+
 button:hover {
     background-color: aliceblue;
     border-radius: 5px;
     cursor: pointer;
 
 }
+
 
 
 
