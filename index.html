@@ -76,8 +76,8 @@
   <div id="testBouton">
     <button class="bouton" id="CalculScore" onclick="CalculScore()">Calcul des scores</button>
     <!-- <button class="bouton" id="Winner" onclick="Winner()">Vainqueur ?</button> -->
-    <button class="bouton" id="Ajout" onclick="Ajout()">Ajouter un joueur</button>
-    <button class="bouton" id="Retrait" onclick="Retrait()">Supprimer un joueur</button>
+    <button title="Ajouter un joueur" class="bouton" id="Ajout" onclick="Ajout()">+</button>
+    <button class="bouton" id="Retrait" onclick="Retrait()"> - </button>
 
     <button class="bouton" id="NewScore" onclick="NewScore()">Supprimer les scores</button>
     <button class="bouton" id="NewGame" onclick="NewGame()">Nouveau jeu</button>
@@ -192,8 +192,13 @@
           winner = document.getElementById(`Player${i}`).value;
         }
       }
+      if (maxValue === 0) {
+        alert("Aucun score à calculer !")
 
-      alert(`Bravo !! ${winner} a gagné avec un score de ${maxValue} !!`);
+      }
+      else {
+        alert(`Bravo !! ${winner} a gagné avec un score de ${maxValue} !!`);
+      }
     }
 
     function Ajout() {
@@ -220,6 +225,10 @@
         table.deleteRow(rowCount - 1);
         numberOfPlayers -= 1;
 
+      }
+      if (numberOfPlayers === 3) {
+        document.getElementById('Retrait').style.display = "none";
+        document.getElementById('Ajout').style.display = "initial";
       }
 
     }
