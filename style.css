@@ -24,11 +24,14 @@ tr {
     border: solid;
     border-collapse: collapse;
     border-color: black;
+
+
 }
 
 input[type=number] {
-    width: 5em;
-    -moz-appearance: textfield;
+    width: 8em;
+    /* -moz-appearance: textfield; */
+
     border: none;
 
 }
@@ -75,11 +78,15 @@ input[type=text] {
 
 #testBouton {
     display: flex;
-    justify-content: center;
+    width: 900px;
+    margin: auto;
+    justify-content: space-around;
 }
 
 #Retrait {
     display: none;
+
+
 }
 
 button:hover {

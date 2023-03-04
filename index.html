@@ -31,43 +31,43 @@
       <th>Militaire</th>
       <th>Pièces</th>
       <th>Merveille</th>
-      <th>Bleu</th>
-      <th>Jaune</th>
-      <th>Vert</th>
+      <th>Civil</th>
+      <th>Commercial</th>
+      <th>Scientifique</th>
       <th>Score</th>
     </tr>
     <tr>
-      <td><input id="Player1" type="text"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number" onclick="sciencePoints()"></td>
+      <td><input id="Player1" type="text" required></td>
+      <td><input class="points" type="number" min="-6" max="18"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0" readonly="readonly" onclick="sciencePoints()"></td>
       <td id="Score1"></td>
 
     </tr>
 
     <tr>
-      <td><input id="Player2" type="text"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number" onclick="sciencePoints()"></td>
+      <td><input id="Player2" type="text" required></td>
+      <td><input class="points" type="number" min="-6" max="18"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0" readonly="readonly" onclick="sciencePoints()"></td>
       <td id="Score2"></td>
 
     </tr>
 
     <tr>
-      <td><input id="Player3" type="text"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number"></td>
-      <td><input class="points" type="number" onclick="sciencePoints()"></td>
+      <td><input id="Player3" type="text" required></td>
+      <td><input class="points" type="number" min="-6" max="18"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0" readonly="readonly" onclick="sciencePoints()"></td>
       <td id="Score3"></td>
 
     </tr>
@@ -75,7 +75,7 @@
 
   <div id="testBouton">
     <button class="bouton" id="CalculScore" onclick="CalculScore()">Calcul des scores</button>
-    <button class="bouton" id="Winner" onclick="Winner()">Vainqueur ?</button>
+    <!-- <button class="bouton" id="Winner" onclick="Winner()">Vainqueur ?</button> -->
     <button class="bouton" id="Ajout" onclick="Ajout()">Ajouter un joueur</button>
     <button class="bouton" id="Retrait" onclick="Retrait()">Supprimer un joueur</button>
 
@@ -149,7 +149,11 @@
     var activePlayer;
 
     function CalculScore() {
+      //Calcalution of the score and winner announce
       let table = document.getElementById("Scoreboard");
+      let maxValue = 0;
+      let winner = "";
+
       // loop to calc the score
       for (let i = 1; i < numberOfPlayers + 1; i++) { // start a 1 because 0 is columns name, +1 to stop at number of players 
         let currentCell = table.rows.item(i).cells;
@@ -170,9 +174,12 @@
         }
 
       }
-
+      Winner();
 
     }
+
+
+
 
     function Winner() {
       let maxValue = 0;
@@ -195,12 +202,13 @@
         numberOfPlayers += 1;
         let id1 = `Score${numberOfPlayers}`;
         let id2 = `Player${numberOfPlayers}`;
-        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" value="Joueur ${numberOfPlayers}" type="text"></td><td ><input class="points" type="number"></td><td ><input class="points" type="number"></td><td><input class="points" type="number"></td><td><input class="points" type="number"></td><td><input class="points" type="number"></td><td><input class="points" onclick="sciencePoints()" type="number"></td><td id="${id1}"></td></tr>`;
+        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" value="Joueur ${numberOfPlayers}" type="text" required></td><td ><input class="points" type="number" min="-6" max="18"></td><td ><input class="points" type="number" min="0" ></td><td><input class="points" type="number" min="0" ></td><td><input class="points" type="number" min="0" ></td><td><input class="points" type="number" min="0" ></td><td><input class="points" readonly="readonly" onclick="sciencePoints()"  min="0" type="number"></td><td id="${id1}"></td></tr>`;
 
       }
-      else {
+      if (numberOfPlayers === 8) {
         document.getElementById("Ajout").style.display = "none";
       }
+      console.log(numberOfPlayers)
       document.getElementById("Retrait").style.display = "flex";
     }
 
@@ -251,6 +259,7 @@
       for (numberOfPlayers; numberOfPlayers > newNumberOfPlayers; numberOfPlayers--) {
         table.deleteRow(numberOfPlayers);
       }
+      document.getElementById("Ajout").style.display = "flex";
 
     }
 
