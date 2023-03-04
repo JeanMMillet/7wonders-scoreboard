@@ -80,6 +80,9 @@ input[type=text] {
 
 button:hover {
     background-color: aliceblue;
+    border-radius: 5px;
+    cursor: pointer;
+
 }
 
 
@@ -115,7 +118,7 @@ button:hover {
 .modalHeader {
     display: flex;
     margin-right: 0%;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
     align-items: center;
     flex-direction: column;
 
@@ -147,16 +150,29 @@ button:hover {
 .modalBody {
 
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: 1em;
     margin-left: 2.5em;
     margin-right: auto;
+    flex-direction: column;
+}
+
+.modalBody form {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-around;
 }
 
 .modalBody2 {
     display: flex;
     justify-content: center;
     margin-bottom: 1em;
+}
+
+.modalBody3 {
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
 }
 
 .modalFooter {
