@@ -38,11 +38,12 @@
     </tr>
     <tr>
       <td><input id="Player1" type="text" placeholder="Joueur 1" required></td>
-      <td><input class="points" type="number" min="-6" max="18"></td>
-      <td><input class="points" type="number" min="0"></td>
-      <td><input class="points" type="number" min="0"></td>
-      <td><input class="points" type="number" min="0"></td>
-      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="-6" max="18" onpaste="return false;"
+          onkeypress="validationNegativeNumber(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
       <td><input class="points" type="number" min="0" readonly="readonly" onclick="sciencePoints()"></td>
       <td id="Score1"></td>
 
@@ -50,11 +51,12 @@
 
     <tr>
       <td><input id="Player2" type="text" placeholder="Joueur 2" required></td>
-      <td><input class="points" type="number" min="-6" max="18"></td>
-      <td><input class="points" type="number" min="0"></td>
-      <td><input class="points" type="number" min="0"></td>
-      <td><input class="points" type="number" min="0"></td>
-      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="-6" max="18" onpaste="return false;"
+          onkeypress="validationNegativeNumber(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
       <td><input class="points" type="number" min="0" readonly="readonly" onclick="sciencePoints()"></td>
       <td id="Score2"></td>
 
@@ -62,11 +64,12 @@
 
     <tr>
       <td><input id="Player3" type="text" placeholder="Joueur 3" required></td>
-      <td><input class="points" type="number" min="-6" max="18"></td>
-      <td><input class="points" type="number" min="0"></td>
-      <td><input class="points" type="number" min="0"></td>
-      <td><input class="points" type="number" min="0"></td>
-      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="-6" max="18" onpaste="return false;"
+          onkeypress="validationNegativeNumber(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
       <td><input class="points" type="number" min="0" readonly="readonly" onclick="sciencePoints()"></td>
       <td id="Score3"></td>
 
@@ -148,6 +151,22 @@
     var clickedInput;
     var activePlayer;
 
+
+    function validationNumber(event) {
+      let regex = RegExp('[0-9]');
+
+      if (!regex.test(event.key)) {
+        event.preventDefault();
+      }
+    }
+    function validationNegativeNumber(event) {
+      let regex = RegExp('[0-9\-]');
+
+      if (!regex.test(event.key)) {
+        event.preventDefault();
+      }
+    }
+
     document.getElementById("tablet").oninput = function () {
       document.getElementById("tabletNumber").value = document.getElementById("tablet").value;
       SciencePointsCalc2()
@@ -222,7 +241,7 @@
         numberOfPlayers += 1;
         let id1 = `Score${numberOfPlayers}`;
         let id2 = `Player${numberOfPlayers}`;
-        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" placeholder="Joueur ${numberOfPlayers}" type="text" required></td><td ><input class="points" type="number" min="-6" max="18"></td><td ><input class="points" type="number" min="0" ></td><td><input class="points" type="number" min="0" ></td><td><input class="points" type="number" min="0" ></td><td><input class="points" type="number" min="0" ></td><td><input class="points" readonly="readonly" onclick="sciencePoints()"  min="0" type="number"></td><td id="${id1}"></td></tr>`;
+        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" placeholder="Joueur ${numberOfPlayers}" type="text" required></td><td ><input class="points" type="number" min="-6" max="18" onpaste="return false;" onkeypress="validationNumber(event)"></td><td ><input class="points" type="number" min="0"  onpaste="return false;" onkeypress="validationNumber(event)"></td><td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td><td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td><td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNegativeNumber(event)"></td><td><input class="points" readonly="readonly" onclick="sciencePoints()"  min="0" type="number"></td><td id="${id1}"></td></tr>`;
 
       }
       if (numberOfPlayers === 8) {
