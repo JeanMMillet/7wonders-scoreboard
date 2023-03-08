@@ -150,7 +150,7 @@
     let numberOfPlayers = 3;
     var clickedInput;
     var activePlayer;
-    window.babylonePlayer = "";
+    let babylonePlayer = localStorage.getItem('babylone Player');
 
 
     function pointsValidation(event) {
@@ -350,11 +350,17 @@
         document.getElementById("wheel").value = 0;
         let Score = 0;
 
-        if (window.babylonePlayer.value === undefined) {
+        if (localStorage.getItem('babylone Player') === null) {
           document.getElementById("wonderBonus").disabled = false
+          document.getElementById("wonderBonus").checked = false
         }
-        else if (window.babylonePlayer.value != activePlayer) {
+        else if (localStorage.getItem('babylone Player') != activePlayer) {
           document.getElementById("wonderBonus").disabled = true
+          document.getElementById("wonderBonus").checked = false
+        }
+        else if (localStorage.getItem('babylone Player') === activePlayer) {
+          document.getElementById("wonderBonus").disabled = false
+          document.getElementById("wonderBonus").checked = true
         }
       }
     }
@@ -390,7 +396,6 @@
       // 
 
 
-
       Score = toto[0] ** 2 + toto[1] ** 2 + toto[2] ** 2 + bonusScore
       window.clickedInput.value = Score;
       //console.log(bonusScore);
@@ -399,11 +404,18 @@
       document.getElementById("tabletNumber").value = document.getElementById("wheelNumber").value = document.getElementById("compassNumber").value = 0;
       document.getElementById("myModal").style.display = "none";
 
-      if (document.getElementById("wonderBonus").checked && babylonePlayer.value === undefined) {
-        babylonePlayer.value = activePlayer
-        console.log(window.babylonePlayer.value)
-        document.getElementById("wonderBonus").checked = false;
+      if (document.getElementById("wonderBonus").checked && localStorage.getItem('babylone Player') === null) {
+        localStorage.setItem('babylone Player', activePlayer);
+        // babylonePlayer.value = activePlayer
       }
+      else if (babylonePlayer === activePlayer && !document.getElementById("wonderBonus").checked) {
+        localStorage.removeItem('babylone Player');
+      }
+
+
+
+      console.log(activePlayer);
+      console.log(localStorage.getItem("babylone Player"));
 
 
     }
