@@ -39,11 +39,11 @@
     <tr>
       <td><input id="Player1" type="text" placeholder="Joueur 1" required></td>
       <td><input class="points" type="number" min="-6" max="18" onpaste="return false;"
-          onkeypress="validationNegativeNumber(event)"></td>
-      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
-      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
-      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
-      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
+          onkeypress="validationMilitaryPoints(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td>
       <td><input class="points" type="number" min="0" readonly="readonly" onclick="sciencePoints()"></td>
       <td id="Score1"></td>
 
@@ -52,11 +52,11 @@
     <tr>
       <td><input id="Player2" type="text" placeholder="Joueur 2" required></td>
       <td><input class="points" type="number" min="-6" max="18" onpaste="return false;"
-          onkeypress="validationNegativeNumber(event)"></td>
-      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
-      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
-      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
-      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
+          onkeypress="validationMilitaryPoints(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td>
       <td><input class="points" type="number" min="0" readonly="readonly" onclick="sciencePoints()"></td>
       <td id="Score2"></td>
 
@@ -65,11 +65,11 @@
     <tr>
       <td><input id="Player3" type="text" placeholder="Joueur 3" required></td>
       <td><input class="points" type="number" min="-6" max="18" onpaste="return false;"
-          onkeypress="validationNegativeNumber(event)"></td>
-      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
-      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
-      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
-      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td>
+          onkeypress="validationMilitaryPoints(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td>
+      <td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td>
       <td><input class="points" type="number" min="0" readonly="readonly" onclick="sciencePoints()"></td>
       <td id="Score3"></td>
 
@@ -150,21 +150,50 @@
     let numberOfPlayers = 3;
     var clickedInput;
     var activePlayer;
+    window.babylonePlayer = "";
 
 
-    function validationNumber(event) {
+    function pointsValidation(event) {
       let regex = RegExp('[0-9]');
 
       if (!regex.test(event.key)) {
         event.preventDefault();
       }
     }
-    function validationNegativeNumber(event) {
-      let regex = RegExp('[0-9\-]');
+    function validationMilitaryPoints(event) {
+      let activeInput = document.activeElement;
 
-      if (!regex.test(event.key)) {
+      if (activeInput.validity.badInput === true) {
+        let regex = RegExp('[0-6]');
+        if (!regex.test(event.key)) {
+          event.preventDefault();
+        }
+
+      }
+      else if ((activeInput.value >= -6 && activeInput.value <= -1) || activeInput.value > 1) {
         event.preventDefault();
       }
+
+      else if (activeInput.value == 1) {
+        let regex = RegExp('[0-8]');
+        if (!regex.test(event.key)) {
+          event.preventDefault();
+        }
+      }
+      else if (activeInput.value === "") {
+        let regex = RegExp('[0-9\-]');
+        if (!regex.test(event.key)) {
+          event.preventDefault();
+        }
+      }
+
+      else {
+        let regex = RegExp('[0-9]');
+        if (!regex.test(event.key)) {
+          event.preventDefault();
+        }
+      }
+
     }
 
     document.getElementById("tablet").oninput = function () {
@@ -213,8 +242,6 @@
     }
 
 
-
-
     function Winner() {
       let maxValue = 0;
       let winner = "";
@@ -241,7 +268,7 @@
         numberOfPlayers += 1;
         let id1 = `Score${numberOfPlayers}`;
         let id2 = `Player${numberOfPlayers}`;
-        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" placeholder="Joueur ${numberOfPlayers}" type="text" required></td><td ><input class="points" type="number" min="-6" max="18" onpaste="return false;" onkeypress="validationNumber(event)"></td><td ><input class="points" type="number" min="0"  onpaste="return false;" onkeypress="validationNumber(event)"></td><td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td><td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNumber(event)"></td><td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationNegativeNumber(event)"></td><td><input class="points" readonly="readonly" onclick="sciencePoints()"  min="0" type="number"></td><td id="${id1}"></td></tr>`;
+        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" placeholder="Joueur ${numberOfPlayers}" type="text" required></td><td ><input class="points" type="number" min="-6" max="18" onpaste="return false;" onkeypress="pointsValidation(event)"></td><td ><input class="points" type="number" min="0"  onpaste="return false;" onkeypress="pointsValidation(event)"></td><td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td><td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td><td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationMilitaryPoints(event)"></td><td><input class="points" readonly="readonly" onclick="sciencePoints()"  min="0" type="number"></td><td id="${id1}"></td></tr>`;
 
       }
       if (numberOfPlayers === 8) {
@@ -264,7 +291,7 @@
         document.getElementById('Retrait').style.display = "none";
         document.getElementById('Ajout').style.display = "initial";
       }
-
+      document.getElementById("Ajout").style.display = "flex";
     }
 
     function NewScore() {
@@ -307,17 +334,29 @@
     }
 
     function sciencePoints() {
+
       window.clickedInput = document.activeElement;
-      activePlayer = clickedInput.parentElement.parentElement.cells[0].children[0].value
+      activePlayer = clickedInput.parentElement.parentElement.cells[0].children[0].value;
+      if (activePlayer === "") {
+        alert("Entrez le nom d'un joueur")
+      }
 
+      else {
 
-      document.getElementById("activePlayer").innerText = activePlayer;
-      document.getElementById("myModal").style.display = "flex";
-      document.getElementById("tablet").value = 0;
-      document.getElementById("compass").value = 0;
-      document.getElementById("wheel").value = 0;
-      let Score = 0;
+        document.getElementById("activePlayer").innerText = activePlayer;
+        document.getElementById("myModal").style.display = "flex";
+        document.getElementById("tablet").value = 0;
+        document.getElementById("compass").value = 0;
+        document.getElementById("wheel").value = 0;
+        let Score = 0;
 
+        if (window.babylonePlayer.value === undefined) {
+          document.getElementById("wonderBonus").disabled = false
+        }
+        else if (window.babylonePlayer.value != activePlayer) {
+          document.getElementById("wonderBonus").disabled = true
+        }
+      }
     }
 
     function SciencePointsCalc() {
@@ -327,6 +366,8 @@
       let bonusScore = 0;
       let Score = 0;
       let joker = 0;
+
+
 
       let toto = [Number(document.getElementById("wheel").value), Number(document.getElementById("compass").value), Number(document.getElementById("tablet").value)];
       toto = toto.sort();
@@ -354,16 +395,22 @@
       window.clickedInput.value = Score;
       //console.log(bonusScore);
       //console.log(window.clickedInput.value);
-      document.getElementById("tablet").value = document.getElementById("wheel").value = document.getElementById("compass").value = "";
-      document.getElementById("tabletNumber").value = document.getElementById("wheelNumber").value = document.getElementById("compassNumber").value = "2";
+      document.getElementById("tablet").value = document.getElementById("wheel").value = document.getElementById("compass").value = 0;
+      document.getElementById("tabletNumber").value = document.getElementById("wheelNumber").value = document.getElementById("compassNumber").value = 0;
       document.getElementById("myModal").style.display = "none";
+
+      if (document.getElementById("wonderBonus").checked && babylonePlayer.value === undefined) {
+        babylonePlayer.value = activePlayer
+        console.log(window.babylonePlayer.value)
+        document.getElementById("wonderBonus").checked = false;
+      }
 
 
     }
 
     function CloseModal() {
-      document.getElementById("tablet").value = document.getElementById("wheel").value = document.getElementById("compass").value = "";
-      document.getElementById("tabletNumber").value = document.getElementById("wheelNumber").value = document.getElementById("compassNumber").value = "2";
+      document.getElementById("tablet").value = document.getElementById("wheel").value = document.getElementById("compass").value = 0;
+      document.getElementById("tabletNumber").value = document.getElementById("wheelNumber").value = document.getElementById("compassNumber").value = 0;
       document.getElementById("myModal").style.display = "none";
       document.getElementById("wonderBonus").checked = false;
     }
