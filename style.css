@@ -52,7 +52,7 @@ input[type=text] {
 
 
 .militaire {
-    background-color: crimson;
+    background-color: rgb(204, 48, 48);
 }
 
 .coins {
@@ -60,11 +60,11 @@ input[type=text] {
 }
 
 .science {
-    background-color: green;
+    background-color: rgb(30, 156, 76);
 }
 
 .civil {
-    background-color: blue;
+    background-color: rgb(56, 56, 234);
 }
 
 .wonder {
@@ -137,7 +137,7 @@ button:hover {
 
 .modal-content {
     margin-top: 10%;
-    background-color: rgb(35, 173, 86, 1);
+    background-color: rgb(30, 156, 76);
     width: 40%;
     height: fit-content;
 
