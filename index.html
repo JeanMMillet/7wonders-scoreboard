@@ -264,14 +264,14 @@
 
     function Ajout() {
       //Add a row for a new player (max 8) with an id for player name and player score (use in CalculScore and Winner)
-      if (numberOfPlayers < 8) {
+      if (numberOfPlayers < 7) {
         numberOfPlayers += 1;
         let id1 = `Score${numberOfPlayers}`;
         let id2 = `Player${numberOfPlayers}`;
         document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" placeholder="Joueur ${numberOfPlayers}" type="text" required></td><td ><input class="points" type="number" min="-6" max="18" onpaste="return false;" onkeypress="pointsValidation(event)"></td><td ><input class="points" type="number" min="0"  onpaste="return false;" onkeypress="pointsValidation(event)"></td><td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td><td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="pointsValidation(event)"></td><td><input class="points" type="number" min="0" onpaste="return false;" onkeypress="validationMilitaryPoints(event)"></td><td><input class="points" readonly="readonly" onclick="sciencePoints()"  min="0" type="number"></td><td id="${id1}"></td></tr>`;
 
       }
-      if (numberOfPlayers === 8) {
+      if (numberOfPlayers === 7) {
         document.getElementById("Ajout").style.display = "none";
       }
 
@@ -420,13 +420,6 @@
 
     }
 
-    function CloseModal() {
-      document.getElementById("tablet").value = document.getElementById("wheel").value = document.getElementById("compass").value = 0;
-      document.getElementById("tabletNumber").value = document.getElementById("wheelNumber").value = document.getElementById("compassNumber").value = 0;
-      document.getElementById("myModal").style.display = "none";
-      document.getElementById("wonderBonus").checked = false;
-    }
-
     function SciencePointsCalc2() {
 
       let nbWheel = Number(document.getElementById("wheel").value);
@@ -464,7 +457,12 @@
       //console.log(bonusScore);
     }
 
-
+    function CloseModal() {
+      document.getElementById("tablet").value = document.getElementById("wheel").value = document.getElementById("compass").value = 0;
+      document.getElementById("tabletNumber").value = document.getElementById("wheelNumber").value = document.getElementById("compassNumber").value = 0;
+      document.getElementById("myModal").style.display = "none";
+      document.getElementById("wonderBonus").checked = false;
+    }
   </script>
 
 </body>
