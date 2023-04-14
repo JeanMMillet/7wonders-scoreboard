@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>7 wonders scoreboards</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+  <h1>7 wonders scoreboard</h1>
+
+  <table id="Scoreboard">
+    <!--Create the start table for 3 players with the id for the player name and score 
+      (need for the score calculation and winner announce)-->
+    <colgroup>
+      <col class="playerName">
+      <col class="militaire">
+      <col class="coins">
+      <col class="wonder">
+      <col class="civil">
+      <col class="commerce">
+      <col class="science">
+      <col class="score">
+    </colgroup>
+    <tr>
+      <th>Nom</th>
+      <th>Militaire</th>
+      <th>Pièces</th>
+      <th>Merveille</th>
+      <th>Civil</th>
+      <th>Commercial</th>
+      <th>Scientifique</th>
+      <th>Score</th>
+    </tr>
+    <tr>
+      <td><input id="Player1" type="text" placeholder="Joueur 1" required></td>
+      <td><input class="points" type="number" min="-6" max="18"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0" readonly="readonly" onclick="sciencePoints()"></td>
+      <td id="Score1"></td>
+
+    </tr>
+
+    <tr>
+      <td><input id="Player2" type="text" placeholder="Joueur 2" required></td>
+      <td><input class="points" type="number" min="-6" max="18"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0" readonly="readonly" onclick="sciencePoints()"></td>
+      <td id="Score2"></td>
+
+    </tr>
+
+    <tr>
+      <td><input id="Player3" type="text" placeholder="Joueur 3" required></td>
+      <td><input class="points" type="number" min="-6" max="18"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0"></td>
+      <td><input class="points" type="number" min="0" readonly="readonly" onclick="sciencePoints()"></td>
+      <td id="Score3"></td>
+
+    </tr>
+  </table>
+
+  <div id="testBouton">
+    <button class="bouton" id="CalculScore" onclick="CalculScore()">Calcul des scores</button>
+    <!-- <button class="bouton" id="Winner" onclick="Winner()">Vainqueur ?</button> -->
+    <button title="Ajouter un joueur" class="bouton" id="Ajout" onclick="Ajout()">+</button>
+    <button class="bouton" id="Retrait" onclick="Retrait()"> - </button>
+
+    <button class="bouton" id="NewScore" onclick="NewScore()">Supprimer les scores</button>
+    <button class="bouton" id="NewGame" onclick="NewGame()">Nouveau jeu</button>
+  </div>
+
+
+
+
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+
+    <div class="modal-content">
+      <div class="modalHeader">
+        <h1 class="modalTitle">Calcul des points Sciences pour</h1>
+        <!-- <button id="close" onclick="CloseModal()">&#x2716;</button> -->
+        <h2 id="activePlayer"></h2>
+      </div>
+
+      <div class="modalBody">
+        <form>
+          <div>
+            <label for="wheel">Nombre de cartes</label>
+            <img src="Roue.png" alt="Roue">
+            <output for="wheel" name="wheelNumber" id="wheelNumber">0</output>
+            <input id="wheel" oninput="SciencePointsCalc2()" name="wheel" type="range" max="4" value="2"
+              class="numberOfSymbols">
+          </div>
+          <div>
+            <label for="compass">Nombre de cartes</label>
+            <img src="Compass.png" alt="Compas">
+            <output for="compass" name="compassNumber" id="compassNumber">0</output>
+            <input id="compass" oninput="SciencePointsCalc2()" class="numberOfSymbols" name="compass" type="range"
+              max="4" value="2">
+          </div>
+
+          <div>
+            <label for="tablet">Nombre de cartes</label>
+            <img src="Tablet.png" alt="Tablette">
+            <output for="tablet" name="tabletNumber" id="tabletNumber">0</output>
+            <input id="tablet" class="numberOfSymbols" name="tablet" type="range" max="4" value="2"
+              oninput="SciencePointsCalc2()">
+          </div>
+        </form>
+
+
+      </div>
+
+      <div class="modalBody2">
+        <input name="Joker" id="wonderBonus" type="checkbox" oninput="SciencePointsCalc2()">
+        <label for="Joker">Merveille de Babylone construite</label>
+      </div>
+
+      <div class="modalBody3">
+        <output id="scoreScience">Score: </output>
+      </div>
+
+      <div class="modalFooter">
+        <button class="modalButton" onclick="CloseModal()">Annuler</button>
+        <button class="modalButton" onclick="SciencePointsCalc()">Calcul des points</button>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let numberOfPlayers = 3;
+    var clickedInput;
+    var activePlayer;
+
+    document.getElementById("tablet").oninput = function () {
+      document.getElementById("tabletNumber").value = document.getElementById("tablet").value;
+      SciencePointsCalc2()
+    }
+
+    document.getElementById("wheel").oninput = function () {
+      document.getElementById("wheelNumber").value = document.getElementById("wheel").value;
+      SciencePointsCalc2()
+    }
+
+    document.getElementById("compass").oninput = function () {
+      document.getElementById("compassNumber").value = document.getElementById("compass").value;
+      SciencePointsCalc2()
+    }
+
+    function CalculScore() {
+      //Calcalution of the score and winner announce
+      let table = document.getElementById("Scoreboard");
+      let maxValue = 0;
+      let winner = "";
+
+      // loop to calc the score
+      for (let i = 1; i < numberOfPlayers + 1; i++) { // start a 1 because 0 is columns name, +1 to stop at number of players 
+        let currentCell = table.rows.item(i).cells;
+        let cellLength = 8;
+        let Score = 0;
+
+        for (let j = 1; j < cellLength - 1; j++) {
+          // start at 1 because 0 is player name, -1 to stop before the last columns which is for the score
+          let cellValue = Number(currentCell[j].firstChild.value);
+          if (j == 2) {
+            Score = Score + Math.floor(cellValue / 3)
+          }
+          else {
+            Score = Score + cellValue;
+
+          }
+          document.getElementById(`Score${i}`).innerHTML = Score;
+        }
+
+      }
+      Winner();
+
+    }
+
+
+
+
+    function Winner() {
+      let maxValue = 0;
+      let winner = "";
+      for (let i = 1; i < numberOfPlayers + 1; i++) {
+        // the loop will get each score and compare it to the maxValue
+        // if > maxValue store the value and the player name then announce the winner and his score
+        if (Number(document.getElementById(`Score${i}`).innerHTML) > maxValue) {
+          maxValue = document.getElementById(`Score${i}`).innerHTML;
+          winner = document.getElementById(`Player${i}`).value;
+        }
+      }
+      if (maxValue === 0) {
+        alert("Aucun score à calculer !")
+
+      }
+      else {
+        alert(`Bravo !! ${winner} a gagné avec un score de ${maxValue} !!`);
+      }
+    }
+
+    function Ajout() {
+      //Add a row for a new player (max 8) with an id for player name and player score (use in CalculScore and Winner)
+      if (numberOfPlayers < 8) {
+        numberOfPlayers += 1;
+        let id1 = `Score${numberOfPlayers}`;
+        let id2 = `Player${numberOfPlayers}`;
+        document.getElementById("Scoreboard").insertRow(-1).innerHTML = `<tr><td><input id="${id2}" placeholder="Joueur ${numberOfPlayers}" type="text" required></td><td ><input class="points" type="number" min="-6" max="18"></td><td ><input class="points" type="number" min="0" ></td><td><input class="points" type="number" min="0" ></td><td><input class="points" type="number" min="0" ></td><td><input class="points" type="number" min="0" ></td><td><input class="points" readonly="readonly" onclick="sciencePoints()"  min="0" type="number"></td><td id="${id1}"></td></tr>`;
+
+      }
+      if (numberOfPlayers === 8) {
+        document.getElementById("Ajout").style.display = "none";
+      }
+
+      document.getElementById("Retrait").style.display = "flex";
+    }
+
+    function Retrait() {
+      // Delete a player in the scoreboard only if nb of players > 3
+      if (numberOfPlayers > 3) {
+        let table = document.getElementById("Scoreboard");
+        let rowCount = table.rows.length;
+        table.deleteRow(rowCount - 1);
+        numberOfPlayers -= 1;
+
+      }
+      if (numberOfPlayers === 3) {
+        document.getElementById('Retrait').style.display = "none";
+        document.getElementById('Ajout').style.display = "initial";
+      }
+
+    }
+
+    function NewScore() {
+      let table = document.getElementById("Scoreboard");
+      // loop to delete value in cell
+      for (let i = 1; i < numberOfPlayers + 1; i++) { // start a 1 because 0 is columns name, +1 to stop at number of players 
+        let currentCell = table.rows.item(i).cells;
+        let cellLength = 8;
+
+        for (let j = 1; j < cellLength - 1; j++) {
+
+          currentCell[j].firstChild.value = "";
+        }
+        document.getElementById(`Score${i}`).innerHTML = "";
+      }
+    }
+
+    function NewGame() {
+      // function to reset the scoreboard
+      let table = document.getElementById("Scoreboard");
+      let newNumberOfPlayers = 3;
+      // loop to delete value in cell for players 1 to 3
+      for (let i = 1; i < newNumberOfPlayers + 1; i++) { // start a 1 because 0 is columns name, +1 to stop at number of players 
+        let currentCell = table.rows.item(i).cells;
+        let cellLength = currentCell.length;
+
+        for (let j = 1; j < cellLength - 1; j++) {
+
+          currentCell[j].firstChild.value = "";
+        }
+        document.getElementById(`Score${i}`).innerHTML = "";
+        document.getElementById(`Player${i}`).value = "";
+      }
+      // loop to delete row after player 3
+      for (numberOfPlayers; numberOfPlayers > newNumberOfPlayers; numberOfPlayers--) {
+        table.deleteRow(numberOfPlayers);
+      }
+      document.getElementById("Ajout").style.display = "flex";
+
+    }
+
+    function sciencePoints() {
+      window.clickedInput = document.activeElement;
+      activePlayer = clickedInput.parentElement.parentElement.cells[0].children[0].value
+
+
+      document.getElementById("activePlayer").innerText = activePlayer;
+      document.getElementById("myModal").style.display = "flex";
+      document.getElementById("tablet").value = 0;
+      document.getElementById("compass").value = 0;
+      document.getElementById("wheel").value = 0;
+      let Score = 0;
+
+    }
+
+    function SciencePointsCalc() {
+      let nbWheel = Number(document.getElementById("wheel").value);
+      let nbCompass = Number(document.getElementById("compass").value);
+      let nbTablet = Number(document.getElementById("tablet").value);
+      let bonusScore = 0;
+      let Score = 0;
+      let joker = 0;
+
+      let toto = [Number(document.getElementById("wheel").value), Number(document.getElementById("compass").value), Number(document.getElementById("tablet").value)];
+      toto = toto.sort();
+      // Create an array with the 3 values then sort it
+
+
+      //Check if joker is the wonder joker is checked then add it to 1 sort of symbol to optimize score
+      if (document.getElementById("wonderBonus").checked) {
+        joker = 1;
+        if (toto[0] == toto[1] || toto[2] == 4) {// if [0] = [1] or [0] = 0 et [2] = 4 then add joker to [2] else to [0] 
+          toto[2] += joker
+        }
+        else {
+          toto[0] += joker
+        }
+      }
+
+      //7 points for each complete series -> 7 * the smallest number of symbol
+      bonusScore = 7 * toto[0]
+      // 
+
+
+
+      Score = toto[0] ** 2 + toto[1] ** 2 + toto[2] ** 2 + bonusScore
+      window.clickedInput.value = Score;
+      //console.log(bonusScore);
+      //console.log(window.clickedInput.value);
+      document.getElementById("tablet").value = document.getElementById("wheel").value = document.getElementById("compass").value = "";
+      document.getElementById("tabletNumber").value = document.getElementById("wheelNumber").value = document.getElementById("compassNumber").value = "2";
+      document.getElementById("myModal").style.display = "none";
+
+
+    }
+
+    function CloseModal() {
+      document.getElementById("tablet").value = document.getElementById("wheel").value = document.getElementById("compass").value = "";
+      document.getElementById("tabletNumber").value = document.getElementById("wheelNumber").value = document.getElementById("compassNumber").value = "2";
+      document.getElementById("myModal").style.display = "none";
+      document.getElementById("wonderBonus").checked = false;
+    }
+
+    function SciencePointsCalc2() {
+
+      let nbWheel = Number(document.getElementById("wheel").value);
+      let nbCompass = Number(document.getElementById("compass").value);
+      let nbTablet = Number(document.getElementById("tablet").value);
+      let bonusScore = 0;
+      let Score = 0;
+      let joker = 0;
+
+      let toto = [Number(document.getElementById("wheel").value), Number(document.getElementById("compass").value), Number(document.getElementById("tablet").value)];
+      toto = toto.sort();
+      // Create an array with the 3 values then sort it
+
+
+      //Check if joker is the wonder joker is checked then add it to 1 sort of symbol to optimize score
+      if (document.getElementById("wonderBonus").checked) {
+        joker = 1;
+        if (toto[0] == toto[1] || toto[2] == 4) {// if [0] = [1] or [0] = 0 et [2] = 4 then add joker to [2] else to [0] 
+          toto[2] += joker
+        }
+        else {
+          toto[0] += joker
+        }
+      }
+
+      //7 points for each complete series -> 7 * the smallest number of symbol
+      bonusScore = 7 * toto[0]
+      // 
+
+
+
+      Score = toto[0] ** 2 + toto[1] ** 2 + toto[2] ** 2 + bonusScore
+      document.getElementById("scoreScience").innerText = "Score: " + Score
+
+      //console.log(bonusScore);
+    }
+
+
+  </script>
+
+</body>
+
+</html>
