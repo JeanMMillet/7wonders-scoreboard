@@ -3,31 +3,12 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import PlayerRow from './PlayerRow'
+import Player from './Player'
+import AddPlayer from './AddPlayer'
+import RemovePlayer from './RemovePlayer'
 
 function App() {
 
- class Player {
-  
-  playerName:string;
-  militaryPoints:number;
-  coinPoints:number;
-  wonderPoints:number;
-  tradingPoints:number;
-  culturePoints:number;
-  sciencePoints:number;
-  id;
-  constructor(id:number) {
-    
-    this.playerName = "";
-    this.militaryPoints = 0 ;
-    this.coinPoints = 0;
-    this.wonderPoints=0;
-    this.tradingPoints = 0;
-    this.culturePoints = 0;
-    this.sciencePoints = 0;
-    this.id = id;
-  }
-}
 
 const initialPlayers = [new Player(1),new Player(2), new Player(3)]
 
@@ -51,20 +32,13 @@ function handleClickWinner() {
       <div>
          { players.map((e,index) => <PlayerRow key={e.id} player={e} players={players} setPlayers={setPlayers}index={index} />)}
       </div>
-     
-      <button
-        onClick={() => setPlayers([...players, new Player(players.length + 1)])}
-        disabled={players.length < 7 ? false : true}
-      >
-        Ajouter un joueur
-      </button>
-      <button
-        onClick={() => setPlayers(players.slice(0, players.length - 1))}
-        disabled={players.length > 3 ? false : true}
-      >
-        Supprimer un joueur
-      </button>
-      <button onClick={() => handleClickWinner()}>Vainqueur ?</button>
+      <div className='buttons'>
+        <AddPlayer setPlayers={setPlayers} players={players}/>      
+        <RemovePlayer setPlayers={setPlayers} players={players}/>
+        <button onClick={() => handleClickWinner()}>Vainqueur ?</button>
+      </div>
+      
+      
     </div>
   )
 }

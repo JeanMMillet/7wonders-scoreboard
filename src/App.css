@@ -46,10 +46,18 @@
   background-color: rgb(193, 30, 30);
 }
 
+
+.buttons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+
 /* SCIENCE WINDOW */
 
 #scienceWindow {
   position: absolute;
+  display: flex;
   top: 0;
   left: 0;
   width: 100vw;
@@ -60,4 +68,28 @@
 
 #windowContent {
   background-color: darkgreen;
+  border-radius: 10px;
+  margin: auto;
+  width: 70%;
+}
+#windowContent button{
+  margin-bottom: 2rem;
+}
+#windowContent h1{
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}
+
+
+.sciencePointsRange {
+  margin-bottom: 2rem;
+}
+
+.sciencePointsRange img {
+  height: 2rem;
+  margin: 0rem 2rem 0rem 1rem
+}
+
+.sciencePointsRange output {
+  margin-right: 2rem;
 }
