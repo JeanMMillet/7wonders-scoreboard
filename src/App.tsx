@@ -19,7 +19,7 @@ function handleClickWinner() {
   // Create a new array for comparison to avoid rerender of PlayerRow
   let sortPlayers:any= [];
   players.map((e) => sortPlayers.push(e));
-  sortPlayers.sort((a, b) => b.score - a.score);
+  sortPlayers.sort((a:object, b:object) => b.score - a.score);
   console.log(sortPlayers, players);
   console.log(
     `Vainqueur ${sortPlayers[0].playerName} avec ${sortPlayers[0].score} points`

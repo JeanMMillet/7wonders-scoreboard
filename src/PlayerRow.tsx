@@ -28,6 +28,8 @@ export default function PlayerRow({player, players, index, setPlayers}) {
           wonderPoints: wonderPoints,
           culturePoints: culturePoints,
           tradingPoints: tradingPoints,
+          sciencePoints: sciencePoints,
+
           score:
             militaryPoints + coinPoints + culturePoints + tradingPoints + wonderPoints,
         };
@@ -36,7 +38,7 @@ export default function PlayerRow({player, players, index, setPlayers}) {
       }
     });
     setPlayers(updatePlayers);
-  }, [militaryPoints, coinPoints, culturePoints, tradingPoints, playerName, wonderPoints]);
+  }, [militaryPoints, coinPoints, culturePoints, tradingPoints, playerName, wonderPoints,sciencePoints]);
 
   return (
     <div>

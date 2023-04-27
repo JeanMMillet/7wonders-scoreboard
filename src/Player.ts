@@ -7,6 +7,8 @@ class Player {
   tradingPoints:number;
   culturePoints:number;
   sciencePoints:number;
+  scienceCards:object
+  score:number;
   id;
   constructor(id:number) {
     
@@ -17,6 +19,12 @@ class Player {
     this.tradingPoints = 0;
     this.culturePoints = 0;
     this.sciencePoints = 0;
+    this.scienceCards = {
+      tablet: 0,
+      wheel : 0,
+      compass : 0
+    }
+    this.score = 0;
     this.id = id;
   }
 }
