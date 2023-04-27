@@ -6,11 +6,14 @@ export default function ScienceWindow({
   player,
   setVisible,
   setSciencePoints,
+  setScienceCards, 
+  setIsBabyloneBuilt,
+  IsBabyloneBuilt
 }) {
-  const [tablet, setTablet] = useState(0);
-  const [wheel,setWheel] = useState(0);
-  const [compass,setCompass] = useState(0);
-  const [bonus,setBonus] = useState(0)
+  const [tablet, setTablet] = useState(player.scienceCards.tablet);
+  const [wheel,setWheel] = useState(player.scienceCards.wheel);
+  const [compass,setCompass] = useState(player.scienceCards.compass);
+  const [bonus,setBonus] = useState(player.scienceCards.bonus)
 
   
   
@@ -20,20 +23,23 @@ export default function ScienceWindow({
     
     // setSciencePoints(tablet+wheel+compass);
   };
-  const handleCheck = (e:boolean) => {
-   
+  const handleCheck = (e:boolean) => {   
     if (e) {
-      setBonus(1);
+      setBonus(true);    
     }
     else {
-      setBonus(0);
+      setBonus(false);      
     }
- 
-
   }
-  const handleCalculClick = (tablet:number, wheel:number, compass:number,bonus:number) => {
+
+  const handleCalculClick = (tablet:number, wheel:number, compass:number,bonus:boolean) => {
+      let updatedValues = {wheel: wheel, tablet:tablet,compass:compass, bonus:bonus}
+      setScienceCards(prevState => ({...prevState,...updatedValues}))
       setSciencePoints(scienceScoreCalculation(tablet,wheel,compass,bonus))
       setVisible(false)
+      setIsBabyloneBuilt(bonus)
+
+
   }
   return (
     <div id="scienceWindow">
@@ -45,9 +51,15 @@ export default function ScienceWindow({
           <ScienceInput cardNumber={compass} setCardNumber={setCompass} cardName={"Compas"} />          
         </div>
 
-        <div className="boni"> 
+        <div className="boni">
         <label htmlFor="wonderBonus">Babylone construite ?</label>
-        <input type="checkbox" name="wonderBonus" id="" onChange={(e) => handleCheck(e.target.checked)}/>
+        <input 
+          type="checkbox" 
+          name="wonderBonus" 
+          id="" 
+          checked={bonus}
+          disabled={IsBabyloneBuilt && !player.scienceCards.bonus ? true : false} 
+          onChange={(e) => handleCheck(e.target.checked)}/>
         </div>
 
         <div className="buttons">

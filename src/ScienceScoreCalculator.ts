@@ -1,10 +1,10 @@
 
 
-export default function scienceScoreCalculation (tablet:number, wheel:number, compass:number, bonus:number) {
+export default function scienceScoreCalculation (tablet:number, wheel:number, compass:number, bonus:boolean) {
       
       let scienceCards = [tablet, wheel, compass];
       scienceCards = scienceCards.sort()
-      if (bonus ===1)  {
+      if (bonus)  {
             if (scienceCards[0] == scienceCards[1] || scienceCards[2] ===4) {
                   scienceCards[2] += 1
             }

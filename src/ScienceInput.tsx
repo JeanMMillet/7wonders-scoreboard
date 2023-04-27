@@ -9,8 +9,7 @@ export default function ScienceInput({cardNumber, setCardNumber, cardName }) {
           <input
             type="range"
             name= {cardName}
-            id=""
-            defaultValue={0}
+            id=""            
             value={cardNumber}
             onChange={(e) => setCardNumber(+e.target.value)}
             min={0}

@@ -22,7 +22,8 @@ class Player {
     this.scienceCards = {
       tablet: 0,
       wheel : 0,
-      compass : 0
+      compass : 0,
+      wonderBonus: false
     }
     this.score = 0;
     this.id = id;

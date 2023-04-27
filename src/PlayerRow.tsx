@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import ScienceWindow from "./ScienceWindow";
 
-export default function PlayerRow({player, players, index, setPlayers}) {
+export default function PlayerRow({player, players, index, setPlayers,setIsBabyloneBuilt,IsBabyloneBuilt}) {
   
   const [playerName, setPlayerName] = useState("");
   const [militaryPoints, setMilitaryPoints] = useState(0);
@@ -10,11 +10,16 @@ export default function PlayerRow({player, players, index, setPlayers}) {
   const [culturePoints, setCulturePoints] = useState(0);
   const [tradingPoints, setTradingPoints] = useState(0);
   const [sciencePoints, setSciencePoints] = useState(0);
+  const [scienceCards,setScienceCards] = useState({wheel:0,tablet:0,compass:0,bonus:0})
+
+  
+  
 
   const [visible, setVisible] = useState(false);
 
   function handleScienceClick() {
     setVisible(true);
+    console.log(IsBabyloneBuilt)
   }
   useEffect(() => {
     // Update the table of players after the change of any points
@@ -29,6 +34,7 @@ export default function PlayerRow({player, players, index, setPlayers}) {
           culturePoints: culturePoints,
           tradingPoints: tradingPoints,
           sciencePoints: sciencePoints,
+          scienceCards: scienceCards,
 
           score:
             militaryPoints + coinPoints + culturePoints + tradingPoints + wonderPoints,
@@ -38,7 +44,8 @@ export default function PlayerRow({player, players, index, setPlayers}) {
       }
     });
     setPlayers(updatePlayers);
-  }, [militaryPoints, coinPoints, culturePoints, tradingPoints, playerName, wonderPoints,sciencePoints]);
+    
+  }, [militaryPoints, coinPoints, culturePoints, tradingPoints, playerName, wonderPoints,sciencePoints,scienceCards]);
 
   return (
     <div>
@@ -100,7 +107,15 @@ export default function PlayerRow({player, players, index, setPlayers}) {
           value={tradingPoints+culturePoints+wonderPoints+coinPoints+militaryPoints+sciencePoints} 
           />
           
-          {visible? <ScienceWindow player={player} setVisible={setVisible} setSciencePoints={setSciencePoints} /> : ""}
+          {visible? <ScienceWindow 
+            player={player} 
+            setVisible={setVisible}  
+            setSciencePoints={setSciencePoints} 
+            setScienceCards={setScienceCards}
+            setIsBabyloneBuilt={setIsBabyloneBuilt}
+            IsBabyloneBuilt={IsBabyloneBuilt}
+            /> : ""
+          }
     </div>
   )
          

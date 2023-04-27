@@ -13,6 +13,7 @@ function App() {
 const initialPlayers = [new Player(1),new Player(2), new Player(3)]
 
 const [players, setPlayers] = useState(initialPlayers);
+const [isBabyloneBuilt,setIsBabyloneBuilt] = useState(false) 
 
 function handleClickWinner() {
   // Compare the score of each player and return the winner name and his/her score
@@ -30,7 +31,15 @@ function handleClickWinner() {
     <div className="App">
       <h1>7WONDERS SCOREBOARD</h1>
       <div>
-         { players.map((e,index) => <PlayerRow key={e.id} player={e} players={players} setPlayers={setPlayers}index={index} />)}
+         { players.map((e,index) => <PlayerRow key={e.id} 
+          player={e} 
+          players={players} 
+          setPlayers={setPlayers} 
+          index={index}
+          IsBabyloneBuilt={isBabyloneBuilt}
+          setIsBabyloneBuilt={setIsBabyloneBuilt} 
+          />)
+          }
       </div>
       <div className='buttons'>
         <AddPlayer setPlayers={setPlayers} players={players}/>      
