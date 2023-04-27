@@ -37,7 +37,10 @@ export default function ScienceWindow({
       setScienceCards(prevState => ({...prevState,...updatedValues}))
       setSciencePoints(scienceScoreCalculation(tablet,wheel,compass,bonus))
       setVisible(false)
-      setIsBabyloneBuilt(bonus)
+      if (bonus || (IsBabyloneBuilt && player.scienceCards.bonus)) {
+        setIsBabyloneBuilt(bonus)
+      }
+      
 
 
   }
