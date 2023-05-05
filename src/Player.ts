@@ -6,6 +6,7 @@ class Player {
   wonderPoints:number;
   tradingPoints:number;
   culturePoints:number;
+  guildPoints:number;
   sciencePoints:number;
   scienceCards:object
   score:number;
@@ -18,12 +19,14 @@ class Player {
     this.wonderPoints=0;
     this.tradingPoints = 0;
     this.culturePoints = 0;
+    this.guildPoints = 0;
     this.sciencePoints = 0;
     this.scienceCards = {
       tablet: 0,
       wheel : 0,
       compass : 0,
-      wonderBonus: false
+      wonderBonus: false,
+      guildBonus: false
     }
     this.score = 0;
     this.id = id;

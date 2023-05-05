@@ -1,25 +1,20 @@
 import { useState,useEffect } from "react";
 import ScienceWindow from "./ScienceWindow";
+import ButtonMinus from "./ButtonMinus"
+import ButtonPlus from "./ButtonPlus";
 
 export default function PlayerRow({player, players, index, setPlayers,setIsBabyloneBuilt,IsBabyloneBuilt}) {
   
-  const [playerName, setPlayerName] = useState("");
-  const [militaryPoints, setMilitaryPoints] = useState(0);
-  const [coinPoints, setCoinPoints] = useState(0);
-  const [wonderPoints,setWonderPoints] = useState(0);
-  const [culturePoints, setCulturePoints] = useState(0);
-  const [tradingPoints, setTradingPoints] = useState(0);
-  const [sciencePoints, setSciencePoints] = useState(0);
+
   const [scienceCards,setScienceCards] = useState({wheel:0,tablet:0,compass:0,bonus:0})
-
-  
-  
-
   const [visible, setVisible] = useState(false);
+  const [test,setTest] = useState({...player});
+ 
 
-  function handleScienceClick() {
+  function handleScienceClick() { 
+
     setVisible(true);
-    console.log(IsBabyloneBuilt)
+
   }
   useEffect(() => {
     // Update the table of players after the change of any points
@@ -27,17 +22,18 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
       if (i === index) {
         return {
           ...player,
-          playerName: playerName,
-          militaryPoints: militaryPoints,
-          coinPoints: coinPoints,
-          wonderPoints: wonderPoints,
-          culturePoints: culturePoints,
-          tradingPoints: tradingPoints,
-          sciencePoints: sciencePoints,
-          scienceCards: scienceCards,
-
+          playerName: test.playerName,
+          militaryPoints: test.militaryPoints,
+          coinPoints: test.coinPoints,
+          wonderPoints: test.wonderPoints,
+          culturePoints: test.culturePoints,
+          tradingPoints: test.tradingPoints,
+          guildPoints: test.guildPoints,
+          sciencePoints: test.sciencePoints,
           score:
-            militaryPoints + coinPoints + culturePoints + tradingPoints + wonderPoints,
+            test.score,
+          scienceCards: scienceCards,
+          
         };
       } else {
         return e;
@@ -45,51 +41,86 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
     });
     setPlayers(updatePlayers);
     
-  }, [militaryPoints, coinPoints, culturePoints, tradingPoints, playerName, wonderPoints,sciencePoints,scienceCards]);
+  }, [test]);
 
   return (
-    <div>
+    <div className="playerRow">
+     
      <input
             type="text"            
             className="playerName"
+            name="playerName"
             placeholder="Nom du joueur"
-            onChange={(e) => setPlayerName(e.target.value)}
+            onChange={(e) => setTest({...test, [e.target.name]: e.target.value})}
           />
-        
+         
+          <ButtonMinus setTest={setTest} test={test} />
           <input
-            type="number"            
+            type="number"        
             className="militaryPoints"
-            onChange={(e) => setMilitaryPoints(+e.target.value)}
+            name="militaryPoints"
+            value={test.militaryPoints}
+            // onChange={(e) => setTest({...test, [e.target.name]: +e.target.value})}
             min={-6}
             max={18}
           />
-      
+          <ButtonPlus setTest={setTest} test={test}/>
+          
+          <ButtonMinus setTest={setTest} test={test} />
           <input
             type="number"            
             className="coinPoints"
-            onChange={(e) => setCoinPoints(+e.target.value)}
+            name="coinPoints"
+            value={test.coinPoints}
+            // onChange={(e) => setTest({...test, [e.target.name]: +e.target.value})}
             min={0}
           />
+          <ButtonPlus setTest={setTest} test={test}/>
+
+          <ButtonMinus setTest={setTest} test={test} />
            <input
             type="number"            
-            className="tradingPoints"
-            onChange={(e) => setWonderPoints(+e.target.value)}
+            className="wonderPoints"
+            name="wonderPoints"
+            value={test.wonderPoints}
+            // onChange={(e) => setTest({...test, [e.target.name]: +e.target.value})}
             min={0}
           />
-      
+          <ButtonPlus setTest={setTest} test={test}/>
+
+          <ButtonMinus setTest={setTest} test={test} />
           <input
             type="number"            
             className="culturePoints"
-            onChange={(e) => setCulturePoints(+e.target.value)}
+            name="culturePoints"
+            value={test.culturePoints}
+            // onChange={(e) => setTest({...test, [e.target.name]: +e.target.value})}
             min={0}
           />
-       
+          <ButtonPlus setTest={setTest} test={test}/>
+
+          <ButtonMinus setTest={setTest} test={test} />
           <input
             type="number"            
             className="tradingPoints"
-            onChange={(e) => setTradingPoints(+e.target.value)}
+            name="tradingPoints"
+            value={test.tradingPoints}
+            // onChange={(e) => setTest({...test, [e.target.name]: +e.target.value})}
             min={0}
           />
+          <ButtonPlus setTest={setTest} test={test}/>
+
+          <div className="input"><ButtonMinus setTest={setTest} test={test} />
+          <input
+            type="number"            
+            className="guildPoints"
+            name="guildPoints"
+            value={test.guildPoints}
+            // onChange={(e) => setTest({...test, [e.target.name]: +e.target.value})}
+            min={0}
+          />
+          <ButtonPlus setTest={setTest} test={test}/></div>
+          
       
           <input
             type="number"            
@@ -97,20 +128,21 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
             onClick={() => handleScienceClick()}
             readOnly
             min={0}
-            value={sciencePoints}
+            value={test.sciencePoints}
           />
 
           <input 
           type="number" 
           className="score" 
           readOnly={true} 
-          value={tradingPoints+culturePoints+wonderPoints+coinPoints+militaryPoints+sciencePoints} 
+          value={test.tradingPoints+test.culturePoints+test.wonderPoints+test.coinPoints+test.militaryPoints+test.sciencePoints+test.guildPoints} 
           />
           
           {visible? <ScienceWindow 
-            player={player} 
-            setVisible={setVisible}  
-            setSciencePoints={setSciencePoints} 
+            player={player}
+            test={test}
+            setTest={setTest} 
+            setVisible={setVisible}             
             setScienceCards={setScienceCards}
             setIsBabyloneBuilt={setIsBabyloneBuilt}
             IsBabyloneBuilt={IsBabyloneBuilt}

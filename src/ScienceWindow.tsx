@@ -5,15 +5,18 @@ import scienceScoreCalculation from "./ScienceScoreCalculator";
 export default function ScienceWindow({
   player,
   setVisible,
-  setSciencePoints,
   setScienceCards, 
   setIsBabyloneBuilt,
-  IsBabyloneBuilt
+  IsBabyloneBuilt,
+  test,
+  setTest
 }) {
   const [tablet, setTablet] = useState(player.scienceCards.tablet);
   const [wheel,setWheel] = useState(player.scienceCards.wheel);
   const [compass,setCompass] = useState(player.scienceCards.compass);
-  const [bonus,setBonus] = useState(player.scienceCards.bonus)
+  const [wonderBonus,setWonderBonus] = useState(player.scienceCards.wonderBonus)
+  const [guildBonus,setGuildBonus] = useState(player.scienceCards.guildBonus) 
+  
 
   
   
@@ -25,20 +28,20 @@ export default function ScienceWindow({
   };
   const handleCheck = (e:boolean) => {   
     if (e) {
-      setBonus(true);    
+      setWonderBonus(true);    
     }
     else {
-      setBonus(false);      
+      setWonderBonus(false);      
     }
   }
 
-  const handleCalculClick = (tablet:number, wheel:number, compass:number,bonus:boolean) => {
-      let updatedValues = {wheel: wheel, tablet:tablet,compass:compass, bonus:bonus}
-      setScienceCards(prevState => ({...prevState,...updatedValues}))
-      setSciencePoints(scienceScoreCalculation(tablet,wheel,compass,bonus))
+  const handleCalculClick = (tablet:number, wheel:number, compass:number,wonderBonus:boolean, guildBonus:boolean) => {
+      let updatedValues = {wheel: wheel, tablet:tablet,compass:compass, wonderBonus:wonderBonus, guildBonus:guildBonus}
+      setScienceCards((prevState) => ({...prevState,...updatedValues}))
+      setTest(...test, sciencePoints: scienceScoreCalculation(tablet,wheel,compass,wonderBonus, guildBonus))
       setVisible(false)
-      if (bonus || (IsBabyloneBuilt && player.scienceCards.bonus)) {
-        setIsBabyloneBuilt(bonus)
+      if (wonderBonus || (IsBabyloneBuilt && player.scienceCards.bonus)) {
+        setIsBabyloneBuilt(wonderBonus)
       }
       
 
@@ -60,17 +63,18 @@ export default function ScienceWindow({
           type="checkbox" 
           name="wonderBonus" 
           id="" 
-          checked={bonus}
+          checked={wonderBonus}
           disabled={IsBabyloneBuilt && !player.scienceCards.bonus ? true : false} 
           onChange={(e) => handleCheck(e.target.checked)}/>
         </div>
 
         <div className="buttons">
           <button onClick={() => handleCancelClick()}>Cancel</button>
-        <button onClick={() => handleCalculClick(tablet, wheel, compass,bonus)}>Confirm</button>
+        <button onClick={() => handleCalculClick(tablet, wheel, compass,wonderBonus, guildBonus)}>Confirm</button>
         </div>
         
       </div>
     </div>
   );
 }
+

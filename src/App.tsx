@@ -30,6 +30,9 @@ function handleClickWinner() {
   return (
     <div className="App">
       <h1>7WONDERS SCOREBOARD</h1>
+      <div className='pointsRow'>
+        
+      </div>
       <div>
          { players.map((e,index) => <PlayerRow key={e.id} 
           player={e} 
