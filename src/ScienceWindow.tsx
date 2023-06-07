@@ -38,7 +38,7 @@ export default function ScienceWindow({
   const handleCalculClick = (tablet:number, wheel:number, compass:number,wonderBonus:boolean, guildBonus:boolean) => {
       let updatedValues = {wheel: wheel, tablet:tablet,compass:compass, wonderBonus:wonderBonus, guildBonus:guildBonus}
       setScienceCards((prevState) => ({...prevState,...updatedValues}))
-      setTest(...test, sciencePoints: scienceScoreCalculation(tablet,wheel,compass,wonderBonus, guildBonus))
+      setTest({...test, sciencePoints:scienceScoreCalculation(tablet,wheel,compass,wonderBonus, guildBonus)})
       setVisible(false)
       if (wonderBonus || (IsBabyloneBuilt && player.scienceCards.bonus)) {
         setIsBabyloneBuilt(wonderBonus)

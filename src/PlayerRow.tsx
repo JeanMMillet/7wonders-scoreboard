@@ -45,16 +45,18 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
 
   return (
     <div className="playerRow">
-     
-     <input
+          <div>
+            <input
             type="text"            
             className="playerName"
             name="playerName"
             placeholder="Nom du joueur"
             onChange={(e) => setTest({...test, [e.target.name]: e.target.value})}
           />
-         
-          <ButtonMinus setTest={setTest} test={test} />
+          </div>
+          
+         <div>
+           <ButtonMinus setTest={setTest} test={test} />
           <input
             type="number"        
             className="militaryPoints"
@@ -65,7 +67,8 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
             max={18}
           />
           <ButtonPlus setTest={setTest} test={test}/>
-          
+         </div>
+         <div>
           <ButtonMinus setTest={setTest} test={test} />
           <input
             type="number"            
@@ -76,8 +79,11 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
             min={0}
           />
           <ButtonPlus setTest={setTest} test={test}/>
-
-          <ButtonMinus setTest={setTest} test={test} />
+         </div>
+          
+          
+          <div>
+             <ButtonMinus setTest={setTest} test={test} />
            <input
             type="number"            
             className="wonderPoints"
@@ -87,8 +93,10 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
             min={0}
           />
           <ButtonPlus setTest={setTest} test={test}/>
-
-          <ButtonMinus setTest={setTest} test={test} />
+          </div>
+         
+          <div>
+            <ButtonMinus setTest={setTest} test={test} />
           <input
             type="number"            
             className="culturePoints"
@@ -98,8 +106,10 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
             min={0}
           />
           <ButtonPlus setTest={setTest} test={test}/>
-
-          <ButtonMinus setTest={setTest} test={test} />
+          </div>
+          
+          <div>
+            <ButtonMinus setTest={setTest} test={test} />
           <input
             type="number"            
             className="tradingPoints"
@@ -109,20 +119,25 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
             min={0}
           />
           <ButtonPlus setTest={setTest} test={test}/>
+          </div>
 
-          <div className="input"><ButtonMinus setTest={setTest} test={test} />
-          <input
+          
+
+          <div className="input">
+            <ButtonMinus setTest={setTest} test={test} />
+            <input
             type="number"            
             className="guildPoints"
             name="guildPoints"
             value={test.guildPoints}
             // onChange={(e) => setTest({...test, [e.target.name]: +e.target.value})}
             min={0}
-          />
-          <ButtonPlus setTest={setTest} test={test}/></div>
+            />
+          <ButtonPlus setTest={setTest} test={test}/>
+          </div>
           
-      
-          <input
+          <div>
+             <input
             type="number"            
             className="sciencePoints"
             onClick={() => handleScienceClick()}
@@ -130,15 +145,20 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
             min={0}
             value={test.sciencePoints}
           />
-
-          <input 
+          </div>
+      
+         
+        <div>
+           <input 
           type="number" 
           className="score" 
           readOnly={true} 
           value={test.tradingPoints+test.culturePoints+test.wonderPoints+test.coinPoints+test.militaryPoints+test.sciencePoints+test.guildPoints} 
           />
           
-          {visible? <ScienceWindow 
+        </div>
+         
+          {visible && <ScienceWindow 
             player={player}
             test={test}
             setTest={setTest} 
@@ -146,7 +166,7 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
             setScienceCards={setScienceCards}
             setIsBabyloneBuilt={setIsBabyloneBuilt}
             IsBabyloneBuilt={IsBabyloneBuilt}
-            /> : ""
+            />
           }
     </div>
   )

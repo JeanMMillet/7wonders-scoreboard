@@ -7,6 +7,7 @@ import Player from './Player'
 import AddPlayer from './AddPlayer'
 import RemovePlayer from './RemovePlayer'
 
+
 function App() {
 
 
@@ -14,6 +15,8 @@ const initialPlayers = [new Player(1),new Player(2), new Player(3)]
 
 const [players, setPlayers] = useState(initialPlayers);
 const [isBabyloneBuilt,setIsBabyloneBuilt] = useState(false) 
+const columns = ["Player Name","Military","Coins","Wonder","Culture","Trading","Guild","Science","Score"]
+
 
 function handleClickWinner() {
   // Compare the score of each player and return the winner name and his/her score
@@ -30,11 +33,13 @@ function handleClickWinner() {
   return (
     <div className="App">
       <h1>7WONDERS SCOREBOARD</h1>
-      <div className='pointsRow'>
-        
+      <div className='header'>
+        {columns.map(e => {
+            return <div className='columnTitle'>{e}</div>
+          })}
       </div>
-      <div>
-         { players.map((e,index) => <PlayerRow key={e.id} 
+          
+          { players.map((e,index) => <PlayerRow key={e.id} 
           player={e} 
           players={players} 
           setPlayers={setPlayers} 
@@ -43,14 +48,16 @@ function handleClickWinner() {
           setIsBabyloneBuilt={setIsBabyloneBuilt} 
           />)
           }
-      </div>
+       
+         
+     
       <div className='buttons'>
         <AddPlayer setPlayers={setPlayers} players={players}/>      
         <RemovePlayer setPlayers={setPlayers} players={players}/>
         <button onClick={() => handleClickWinner()}>Vainqueur ?</button>
       </div>
       
-      
+
     </div>
   )
 }

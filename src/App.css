@@ -4,6 +4,7 @@
   padding: 2rem;
   text-align: center;
   box-sizing: border-box;
+  display: flex;
 }
 
 .logo {
@@ -34,18 +35,49 @@
   }
 }
 
-.card {
-  padding: 2em;
+h1 {
+  width: 100%;
 }
 
-.read-the-docs {
-  color: #888;
+.header {
+  display: flex;
+}
+.columnTitle {
+  width: 6.1rem;
+  margin-inline: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .playerRow {
   display: flex;
 }
 
+.playerRow input {
+  background-color: transparent;
+  border: none;
+  width: 50%;
+  display: flex;
+  margin: auto;
+  
+}
+
+.playerRow .playerName {
+  width: 100%;
+}
+
+.playerRow textarea:focus, input:focus{
+  outline: none;
+}
+
+.playerRow div {
+  display: flex;
+  width: 6rem;
+  border: 1px solid;
+  border-radius: 0.5rem;
+  margin-inline: 0.5rem;
+  margin-bottom: 0.5rem;
+  
+}
 
 
 /* Chrome, Safari, Edge, Opera */
@@ -60,34 +92,32 @@ input[type=number] {
   -webkit-appearance: textfield;
   -moz-appearance: textfield;
   appearance: textfield;
-  width: 5rem;
+  
   text-align: center;
+  border: none;
+  background: none;
 }
+
+
 .input {
-  width: 9rem;
+  width: 50%;
+  border: none;
 }
 
 .inputButtons {
   aspect-ratio: 1/1;
-  height: 22px;
+  height: 100%;
   background-color: transparent;
-  border: 1px;
-  position: relative;
+  border: none;
   margin: 0;
   padding: 0;
   z-index: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
-.minus {
-  left: 1.5rem;
-  border-right: 1px solid;
-  border-radius: 0cap;
-}
 
-.plus {
-  position: relative;
-  left: -1.5rem
-}
 .buttons {
   margin-top: 2rem;
   display: flex;
@@ -134,3 +164,46 @@ input[type=number] {
 .sciencePointsRange output {
   margin-right: 2rem;
 }
+
+
+@media screen and (max-width: 700px) {
+  body {
+    min-height: 100vh;
+  }
+  h1 {
+    width: 100vh;
+  }
+ #root {
+  display: flex;
+  transform: rotate(90deg);
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.columnTitle, .playerRow div {
+  width: 3rem;  
+}
+}
+
+@media screen and (max-width: 1060px) {
+  .columnTitle, .playerRow div {
+    width: 3rem;  
+  }
+  #root {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+  }
+    
+
+  
+  }
