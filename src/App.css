@@ -48,6 +48,14 @@ h1 {
   margin-bottom: 0.5rem;
 }
 
+/* .militaryPoints {
+  
+  color: crimson;
+}
+.militaryPoints * {
+  color: crimson;
+  } */
+
 .playerRow {
   display: flex;
 }
@@ -62,7 +70,9 @@ h1 {
 }
 
 .playerRow .playerName {
-  width: 100%;
+  width: 90%;
+  margin: auto;
+  font-size: 0.8rem;
 }
 
 .playerRow textarea:focus, input:focus{
@@ -75,8 +85,7 @@ h1 {
   border: 1px solid;
   border-radius: 0.5rem;
   margin-inline: 0.5rem;
-  margin-bottom: 0.5rem;
-  
+  margin-bottom: 0.5rem;  
 }
 
 
@@ -97,6 +106,7 @@ input[type=number] {
   border: none;
   background: none;
 }
+
 
 
 .input {

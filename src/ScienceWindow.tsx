@@ -9,7 +9,10 @@ export default function ScienceWindow({
   setIsBabyloneBuilt,
   IsBabyloneBuilt,
   test,
-  setTest
+  setTest,
+  hasScienceGuild,
+  setHasScienceGuild,
+  
 }) {
   const [tablet, setTablet] = useState(player.scienceCards.tablet);
   const [wheel,setWheel] = useState(player.scienceCards.wheel);
@@ -26,24 +29,34 @@ export default function ScienceWindow({
     
     // setSciencePoints(tablet+wheel+compass);
   };
-  const handleCheck = (e:boolean) => {   
-    if (e) {
+  const handleWonderCheck = (isChecked:boolean) => {   
+    if (isChecked) {
       setWonderBonus(true);    
     }
     else {
       setWonderBonus(false);      
     }
   }
+  const handleGuildCheck = (isChecked:boolean) => {   
+    if (isChecked) {
+      setGuildBonus(true);    
+    }
+    else {
+      setGuildBonus(false);      
+    }
+  }
 
   const handleCalculClick = (tablet:number, wheel:number, compass:number,wonderBonus:boolean, guildBonus:boolean) => {
       let updatedValues = {wheel: wheel, tablet:tablet,compass:compass, wonderBonus:wonderBonus, guildBonus:guildBonus}
       setScienceCards((prevState) => ({...prevState,...updatedValues}))
-      setTest({...test, sciencePoints:scienceScoreCalculation(tablet,wheel,compass,wonderBonus, guildBonus)})
+      setTest((prevState) => ({...prevState, sciencePoints:scienceScoreCalculation(tablet,wheel,compass,wonderBonus, guildBonus)}))
       setVisible(false)
-      if (wonderBonus || (IsBabyloneBuilt && player.scienceCards.bonus)) {
+      if (wonderBonus || (IsBabyloneBuilt && player.scienceCards.wonderBonus)) {
         setIsBabyloneBuilt(wonderBonus)
       }
-      
+      if (guildBonus || (hasScienceGuild && player.scienceCards.guildBonus)) {
+        setHasScienceGuild(guildBonus)
+      }
 
 
   }
@@ -64,8 +77,19 @@ export default function ScienceWindow({
           name="wonderBonus" 
           id="" 
           checked={wonderBonus}
-          disabled={IsBabyloneBuilt && !player.scienceCards.bonus ? true : false} 
-          onChange={(e) => handleCheck(e.target.checked)}/>
+          disabled={IsBabyloneBuilt && !player.scienceCards.wonderBonus ? true : false} 
+          onChange={(e) => handleWonderCheck(e.target.checked)}/>
+
+          <br />
+
+          <label htmlFor="guildBonus">Guilde des scientifiques ?</label>
+          <input 
+          type="checkbox" 
+          name="guildBonus" 
+          id="" 
+          checked={guildBonus}
+          disabled={hasScienceGuild && !player.scienceCards.guildBonus ? true : false} 
+          onChange={(e) => handleGuildCheck(e.target.checked)}/>
         </div>
 
         <div className="buttons">

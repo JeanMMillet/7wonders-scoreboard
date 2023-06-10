@@ -1,12 +1,12 @@
 import { useState,useEffect } from "react";
 import ScienceWindow from "./ScienceWindow";
 import ButtonMinus from "./ButtonMinus"
-import ButtonPlus from "./ButtonPlus";
+import ButtonPlus from "./ButtonPlus"
 
-export default function PlayerRow({player, players, index, setPlayers,setIsBabyloneBuilt,IsBabyloneBuilt}) {
+export default function PlayerRow({player, players, index, setPlayers,setIsBabyloneBuilt,IsBabyloneBuilt,hasScienceGuild,setHasScienceGuild}) {
   
 
-  const [scienceCards,setScienceCards] = useState({wheel:0,tablet:0,compass:0,bonus:0})
+  const [scienceCards,setScienceCards] = useState({wheel:0,tablet:0,compass:0,guildBonus: false, wonderBonus: false})
   const [visible, setVisible] = useState(false);
   const [test,setTest] = useState({...player});
  
@@ -44,6 +44,7 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
   }, [test]);
 
   return (
+    <>
     <div className="playerRow">
           <div>
             <input
@@ -55,20 +56,20 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
           />
           </div>
           
-         <div>
+         <div className="militaryPoints" >
            <ButtonMinus setTest={setTest} test={test} />
           <input
             type="number"        
             className="militaryPoints"
             name="militaryPoints"
             value={test.militaryPoints}
-            // onChange={(e) => setTest({...test, [e.target.name]: +e.target.value})}
             min={-6}
             max={18}
           />
           <ButtonPlus setTest={setTest} test={test}/>
          </div>
-         <div>
+
+         <div className="coinPoints">
           <ButtonMinus setTest={setTest} test={test} />
           <input
             type="number"            
@@ -82,7 +83,7 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
          </div>
           
           
-          <div>
+          <div className="wonderPoints" >
              <ButtonMinus setTest={setTest} test={test} />
            <input
             type="number"            
@@ -95,7 +96,7 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
           <ButtonPlus setTest={setTest} test={test}/>
           </div>
          
-          <div>
+          <div className="culturePoints" >
             <ButtonMinus setTest={setTest} test={test} />
           <input
             type="number"            
@@ -108,7 +109,7 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
           <ButtonPlus setTest={setTest} test={test}/>
           </div>
           
-          <div>
+          <div className="tradingPoints">
             <ButtonMinus setTest={setTest} test={test} />
           <input
             type="number"            
@@ -123,7 +124,7 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
 
           
 
-          <div className="input">
+          <div className="input guildPoints">
             <ButtonMinus setTest={setTest} test={test} />
             <input
             type="number"            
@@ -136,7 +137,7 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
           <ButtonPlus setTest={setTest} test={test}/>
           </div>
           
-          <div>
+          <div className="sciencePoints">
              <input
             type="number"            
             className="sciencePoints"
@@ -158,7 +159,10 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
           
         </div>
          
-          {visible && <ScienceWindow 
+          
+    </div>
+    <div>
+      {visible && <ScienceWindow 
             player={player}
             test={test}
             setTest={setTest} 
@@ -166,9 +170,12 @@ export default function PlayerRow({player, players, index, setPlayers,setIsBabyl
             setScienceCards={setScienceCards}
             setIsBabyloneBuilt={setIsBabyloneBuilt}
             IsBabyloneBuilt={IsBabyloneBuilt}
-            />
+            hasScienceGuild={hasScienceGuild}
+            setHasScienceGuild={setHasScienceGuild}
+            />    
           }
-    </div>
+          </div>
+          </>
   )
          
 }

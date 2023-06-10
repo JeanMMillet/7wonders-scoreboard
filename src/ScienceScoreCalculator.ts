@@ -29,9 +29,9 @@ export default function scienceScoreCalculation (tablet:number, wheel:number, co
                   scienceCards[0] += 1
             }
       }
-
+      scienceCards = scienceCards.sort()
       let bonusScore = 7*scienceCards[0];
 
-      return scienceCards[0] **2 +scienceCards[1] **2+scienceCards[2] **2 + bonusScore
+      return scienceCards[0] **2 +scienceCards[1] **2 + scienceCards[2] **2 + bonusScore
 
 }

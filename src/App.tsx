@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -14,8 +14,13 @@ function App() {
 const initialPlayers = [new Player(1),new Player(2), new Player(3)]
 
 const [players, setPlayers] = useState(initialPlayers);
-const [isBabyloneBuilt,setIsBabyloneBuilt] = useState(false) 
+const [isBabyloneBuilt,setIsBabyloneBuilt] = useState(false)
+const [hasScienceGuild,setHasScienceGuild] = useState(false) 
+
+
 const columns = ["Player Name","Military","Coins","Wonder","Culture","Trading","Guild","Science","Score"]
+
+
 
 
 function handleClickWinner() {
@@ -23,12 +28,14 @@ function handleClickWinner() {
   // Create a new array for comparison to avoid rerender of PlayerRow
   let sortPlayers:any= [];
   players.map((e) => sortPlayers.push(e));
-  sortPlayers.sort((a:object, b:object) => b.score - a.score);
+  sortPlayers.sort((a, b) => b.score - a.score);
   console.log(sortPlayers, players);
-  console.log(
+  alert(
     `Vainqueur ${sortPlayers[0].playerName} avec ${sortPlayers[0].score} points`
   );
+  
 }
+
 
   return (
     <div className="App">
@@ -45,7 +52,9 @@ function handleClickWinner() {
           setPlayers={setPlayers} 
           index={index}
           IsBabyloneBuilt={isBabyloneBuilt}
-          setIsBabyloneBuilt={setIsBabyloneBuilt} 
+          setIsBabyloneBuilt={setIsBabyloneBuilt}
+          hasScienceGuild={hasScienceGuild}
+          setHasScienceGuild={setHasScienceGuild}
           />)
           }
        
@@ -55,6 +64,7 @@ function handleClickWinner() {
         <AddPlayer setPlayers={setPlayers} players={players}/>      
         <RemovePlayer setPlayers={setPlayers} players={players}/>
         <button onClick={() => handleClickWinner()}>Vainqueur ?</button>
+        <button onMouseDown={(e) => handleOnMouseDown} onMouseUp={() => handleOnMouseUp} onClick={() => handleOnClick}>TEST</button>
       </div>
       
 
