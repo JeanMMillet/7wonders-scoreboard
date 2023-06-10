@@ -1,21 +1,21 @@
 import { useRef } from "react";
 
-export default function ButtonPlus({ setTest, test }) {
+export default function ButtonPlus({ setTest, index }) {
   const timer = useRef(null);
 
   const increment = (e) => {
     const input = e.target.previousSibling;
     if (input.name === "militaryPoints" && input.value < 18) {
-      setTest({ ...test, [input.name]: +input.value + 1 });
+      setTest({ field: input.name, value: +input.value + 1 }, index);
       timer.current = setInterval(() => {
         if (input.name === "militaryPoints" && input.value < 18) {
-          setTest({ ...test, [input.name]: +input.value + 1 });
+          setTest({ field: input.name, value: +input.value + 1 }, index);
         }
       }, 150);
     } else {
-      setTest({ ...test, [input.name]: +input.value + 1 });
+      setTest({ field: input.name, value: +input.value + 1 }, index);
       timer.current = setInterval(
-        () => setTest({ ...test, [input.name]: +input.value + 1 }),
+        () => setTest({ field: input.name, value: +input.value + 1 }, index),
         150
       );
     }

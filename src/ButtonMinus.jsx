@@ -1,20 +1,21 @@
 import { useRef } from "react";
 
-export default function ButtonMinus({ setTest, test }) {
+export default function ButtonMinus({ setTest, index }) {
   const timer = useRef(null);
   const increment = (e) => {
     const input = e.target.nextSibling;
+    console.log(input.name);
     if (
       (input.name === "militaryPoints" && input.value > -6) ||
       input.value > 0
     ) {
-      setTest({ ...test, [input.name]: +input.value - 1 });
+      setTest({ field: input.name, value: +input.value - 1 }, index);
       timer.current = setInterval(() => {
         if (
           (input.name === "militaryPoints" && input.value > -6) ||
           input.value > 0
         ) {
-          setTest({ ...test, [input.name]: +input.value - 1 });
+          setTest({ field: input.name, value: +input.value - 1 }, index);
         }
       }, 150);
     }
