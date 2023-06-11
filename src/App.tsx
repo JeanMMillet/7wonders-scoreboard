@@ -82,8 +82,12 @@ function App() {
     <div className="App">
       <h1>7WONDERS SCOREBOARD</h1>
       <div className="header">
-        {columns.map((e) => {
-          return <div className="columnTitle">{e}</div>;
+        {columns.map((columnName, index) => {
+          return (
+            <div key={index} className="columnTitle">
+              {columnName}
+            </div>
+          );
         })}
       </div>
 

@@ -39,6 +39,7 @@ export default function PlayerRow({
             className="militaryPoints"
             name="militaryPoints"
             value={player.militaryPoints}
+            readOnly
             min={-6}
             max={18}
           />
@@ -52,7 +53,7 @@ export default function PlayerRow({
             className="coinPoints"
             name="coinPoints"
             value={player.coinPoints}
-            // onChange={(e) => setTest({...test, [e.target.name]: +e.target.value})}
+            readOnly
             min={0}
           />
           <ButtonPlus setTest={updatePlayer} />
@@ -65,7 +66,7 @@ export default function PlayerRow({
             className="wonderPoints"
             name="wonderPoints"
             value={player.wonderPoints}
-            // onChange={(e) => setTest({...test, [e.target.name]: +e.target.value})}
+            readOnly
             min={0}
           />
           <ButtonPlus setTest={updatePlayer} />
@@ -78,7 +79,7 @@ export default function PlayerRow({
             className="culturePoints"
             name="culturePoints"
             value={player.culturePoints}
-            // onChange={(e) => setTest({...test, [e.target.name]: +e.target.value})}
+            readOnly
             min={0}
           />
           <ButtonPlus setTest={updatePlayer} />
@@ -91,7 +92,7 @@ export default function PlayerRow({
             className="tradingPoints"
             name="tradingPoints"
             value={player.tradingPoints}
-            // onChange={(e) => setTest({...test, [e.target.name]: +e.target.value})}
+            readOnly
             min={0}
           />
           <ButtonPlus setTest={updatePlayer} />
@@ -104,7 +105,7 @@ export default function PlayerRow({
             className="guildPoints"
             name="guildPoints"
             value={player.guildPoints}
-            // onChange={(e) => setTest({...test, [e.target.name]: +e.target.value})}
+            readOnly
             min={0}
           />
           <ButtonPlus setTest={updatePlayer} />
@@ -142,7 +143,6 @@ export default function PlayerRow({
         {visible && (
           <ScienceWindow
             player={player}
-            test={player}
             updatePlayer={updatePlayer}
             setVisible={setVisible}
             setIsBabyloneBuilt={setIsBabyloneBuilt}
