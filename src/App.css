@@ -5,7 +5,12 @@
   text-align: center;
   box-sizing: border-box;
   display: flex;
+  width: 90%;
 }
+.App {
+  width: 100%;
+}
+
 
 .logo {
   height: 6em;
@@ -41,6 +46,7 @@ h1 {
 
 .header {
   display: flex;
+  justify-content: center;
 }
 .columnTitle {
   width: 6.1rem;
@@ -58,6 +64,7 @@ h1 {
 
 .playerRow {
   display: flex;
+  justify-content: center;
 }
 
 .playerRow input {
